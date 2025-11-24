@@ -1,7 +1,7 @@
 # LLM Project Report
 
 * **updated:** 24.11 Tim
-* **Status:** Part I implementation and evaluation
+* **Status:** Part I/II implementation and evaluation
 
 ## Setup
 
@@ -57,4 +57,39 @@ Implements logic for both the search-augmented agent and the baseline agent.
 
 * One-step response directly from the model without using any search tools
 
+
+#### **generate.py**
+
+Implements logic to generate using both agents, savingthe results in the exact formats as defined by prof
+
+
 ---
+
+
+Results of first round of generations
+
+============================================================
+GRADING RESULTS (EXACT MATCH & F1)
+============================================================
+Total Questions: 100
+Exact Match (EM): 16.00%
+F1 Score: 40.75%
+============================================================
+GRADING RESULTS (LLM-AS-JUDGE)
+============================================================
+Model: deepseek-chat
+Total Questions: 100
+Correct Answers: 73
+Accuracy: 73.00%
+============================================================
+Findings: Model answers good, also searches mulitple times when needed, only need to change system_prompt so the models answers more exact and concise, to pass Exact Match evaluation, therefore give some examples and cut out fillwords,
+maybe also increase the max_steps that the model can take to search
+
+### Notes for now
+To add serching whole websites serper has website mode where it scrapes the whole website of url we give it, so when model thinks it needs more info, it can call second tool that returns all contents of a website, will do that later today
+
+For the scraping whole website, response structure for Serper API:
+- text: str
+-  metadata: dict
+    - - contains different stuff, always author, sometimes title, og:title etc
+- credits: int

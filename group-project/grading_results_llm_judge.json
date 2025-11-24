@@ -1,0 +1,1169 @@
+{
+  "accuracy": 0.72,
+  "correct_count": 72,
+  "total_count": 100,
+  "model_used": "deepseek-chat",
+  "detailed_results": [
+    {
+      "id": "nq_validation_0",
+      "question": "when was the last time anyone was on the moon?",
+      "student_answer": "December 1972",
+      "ground_truths": [
+        "14 December 1972 UTC",
+        "December 1972"
+      ],
+      "correct": true,
+      "explanation": "The student's answer \"December 1972\" is semantically equivalent to the ground truth answer \"December 1972\" and captures the essential factual information from the more specific \"14 December 1972 UTC\". The omission of the specific day and time zone is a minor detail and does not make the answer incorrect.",
+      "raw_judge_response": "CORRECT: The student's answer \"December 1972\" is semantically equivalent to the ground truth answer \"December 1972\" and captures the essential factual information from the more specific \"14 December 1972 UTC\". The omission of the specific day and time zone is a minor detail and does not make the answer incorrect."
+    },
+    {
+      "id": "nq_validation_1",
+      "question": "who wrote he ain't heavy he's my brother lyrics?",
+      "student_answer": "Bobby Scott and Bob Russell",
+      "ground_truths": [
+        "Bobby Scott",
+        "Bob Russell"
+      ],
+      "correct": true,
+      "explanation": "The student answer \"Bobby Scott and Bob Russell\" contains both names listed in the ground truth answer (\"Bobby Scott\" OR \"Bob Russell\"), providing the same factual information.",
+      "raw_judge_response": "CORRECT: The student answer \"Bobby Scott and Bob Russell\" contains both names listed in the ground truth answer (\"Bobby Scott\" OR \"Bob Russell\"), providing the same factual information."
+    },
+    {
+      "id": "nq_validation_2",
+      "question": "how many seasons of the bastard executioner are there?",
+      "student_answer": "one",
+      "ground_truths": [
+        "one",
+        "one season"
+      ],
+      "correct": true,
+      "explanation": "The student's answer \"one\" is semantically equivalent to the ground truth answers \"one\" and \"one season\".",
+      "raw_judge_response": "CORRECT: The student's answer \"one\" is semantically equivalent to the ground truth answers \"one\" and \"one season\"."
+    },
+    {
+      "id": "nq_validation_3",
+      "question": "when did the eagles win last super bowl?",
+      "student_answer": "2018",
+      "ground_truths": [
+        "2017"
+      ],
+      "correct": false,
+      "explanation": "The Philadelphia Eagles won Super Bowl LII in February 2018, but the NFL season is designated by the year it started. The correct season is the 2017 season, making \"2017\" the accurate answer.",
+      "raw_judge_response": "INCORRECT: The Philadelphia Eagles won Super Bowl LII in February 2018, but the NFL season is designated by the year it started. The correct season is the 2017 season, making \"2017\" the accurate answer."
+    },
+    {
+      "id": "nq_validation_4",
+      "question": "who won last year's ncaa women's basketball?",
+      "student_answer": "LSU Tigers",
+      "ground_truths": [
+        "South Carolina"
+      ],
+      "correct": false,
+      "explanation": "The ground truth answer is \"South Carolina,\" while the student answered \"LSU Tigers,\" which is factually different.",
+      "raw_judge_response": "INCORRECT: The ground truth answer is \"South Carolina,\" while the student answered \"LSU Tigers,\" which is factually different."
+    },
+    {
+      "id": "nq_validation_5",
+      "question": "when did the isle of wight become an island?",
+      "student_answer": "7000 BCE",
+      "ground_truths": [
+        "During the last Ice Age"
+      ],
+      "correct": false,
+      "explanation": "The student answer \"7000 BCE\" is a specific date that does not align with the more general but scientifically accurate ground truth \"During the last Ice Age.\" The separation of the Isle of Wight from mainland Britain was a process that occurred over millennia as sea levels rose after the last Ice Age, culminating around 7,000 years ago (or 5000 BCE), not in 7000 BCE. The student's date is factually inaccurate.",
+      "raw_judge_response": "INCORRECT: The student answer \"7000 BCE\" is a specific date that does not align with the more general but scientifically accurate ground truth \"During the last Ice Age.\" The separation of the Isle of Wight from mainland Britain was a process that occurred over millennia as sea levels rose after the last Ice Age, culminating around 7,000 years ago (or 5000 BCE), not in 7000 BCE. The student's date is factually inaccurate."
+    },
+    {
+      "id": "nq_validation_6",
+      "question": "love yourself by justin bieber is about who?",
+      "student_answer": "Justin Bieber",
+      "ground_truths": [
+        "Rihanna"
+      ],
+      "correct": false,
+      "explanation": "The student answer \"Justin Bieber\" is factually wrong and contradicts the ground truth answer \"Rihanna\". The song \"Love Yourself\" is famously about Justin Bieber's ex-girlfriend, Selena Gomez, but the provided ground truth answer is Rihanna, which is also incorrect. Since the student's answer does not match the ground truth, it is incorrect.",
+      "raw_judge_response": "INCORRECT: The student answer \"Justin Bieber\" is factually wrong and contradicts the ground truth answer \"Rihanna\". The song \"Love Yourself\" is famously about Justin Bieber's ex-girlfriend, Selena Gomez, but the provided ground truth answer is Rihanna, which is also incorrect. Since the student's answer does not match the ground truth, it is incorrect."
+    },
+    {
+      "id": "nq_validation_7",
+      "question": "who was the ruler of england in 1616?",
+      "student_answer": "James I",
+      "ground_truths": [
+        "James I"
+      ],
+      "correct": true,
+      "explanation": "The student's answer \"James I\" exactly matches the ground truth answer \"James I\" and contains the same factual information.",
+      "raw_judge_response": "CORRECT: The student's answer \"James I\" exactly matches the ground truth answer \"James I\" and contains the same factual information."
+    },
+    {
+      "id": "nq_validation_8",
+      "question": "what is the hot coffee mod in san andreas?",
+      "student_answer": "Grand Theft Auto San Andreas",
+      "ground_truths": [
+        "a normally inaccessible mini-game"
+      ],
+      "correct": false,
+      "explanation": "The student answer \"Grand Theft Auto San Andreas\" is the name of the game itself, not a description of the \"Hot Coffee\" mod. The ground truth answer correctly identifies the mod as \"a normally inaccessible mini-game.\" The student's response is too vague and does not provide the required factual information.",
+      "raw_judge_response": "INCORRECT: The student answer \"Grand Theft Auto San Andreas\" is the name of the game itself, not a description of the \"Hot Coffee\" mod. The ground truth answer correctly identifies the mod as \"a normally inaccessible mini-game.\" The student's response is too vague and does not provide the required factual information."
+    },
+    {
+      "id": "nq_validation_9",
+      "question": "what is the maximum data rate for the 802.11a standard select one?",
+      "student_answer": "54 Mbps",
+      "ground_truths": [
+        "54 Mbit/s"
+      ],
+      "correct": true,
+      "explanation": "The student's answer \"54 Mbps\" is semantically equivalent to the ground truth \"54 Mbit/s\", as \"Mbps\" and \"Mbit/s\" are standard, interchangeable abbreviations for megabits per second.",
+      "raw_judge_response": "CORRECT: The student's answer \"54 Mbps\" is semantically equivalent to the ground truth \"54 Mbit/s\", as \"Mbps\" and \"Mbit/s\" are standard, interchangeable abbreviations for megabits per second."
+    },
+    {
+      "id": "nq_validation_10",
+      "question": "which state is located in the centre of india?",
+      "student_answer": "Madhya Pradesh",
+      "ground_truths": [
+        "Chhattisgarh",
+        "Madhya Pradesh"
+      ],
+      "correct": true,
+      "explanation": "The student's answer \"Madhya Pradesh\" is one of the explicitly listed correct ground truth answers.",
+      "raw_judge_response": "CORRECT: The student's answer \"Madhya Pradesh\" is one of the explicitly listed correct ground truth answers."
+    },
+    {
+      "id": "nq_validation_11",
+      "question": "who sang i ran all the way home?",
+      "student_answer": "Simon & Garfunkel",
+      "ground_truths": [
+        "The Impalas"
+      ],
+      "correct": false,
+      "explanation": "The student answered \"Simon & Garfunkel,\" but the correct artist is \"The Impalas.\" These are two different musical acts, so the information is factually wrong.",
+      "raw_judge_response": "INCORRECT: The student answered \"Simon & Garfunkel,\" but the correct artist is \"The Impalas.\" These are two different musical acts, so the information is factually wrong."
+    },
+    {
+      "id": "nq_validation_12",
+      "question": "where did the last name wallace come from?",
+      "student_answer": "Scotland",
+      "ground_truths": [
+        "a Scottish surname"
+      ],
+      "correct": true,
+      "explanation": "The student answer \"Scotland\" is semantically equivalent to the ground truth \"a Scottish surname,\" as both indicate a Scottish origin.",
+      "raw_judge_response": "CORRECT: The student answer \"Scotland\" is semantically equivalent to the ground truth \"a Scottish surname,\" as both indicate a Scottish origin."
+    },
+    {
+      "id": "nq_validation_13",
+      "question": "who was the actor that played ben stone on law and order?",
+      "student_answer": "Michael Moriarty",
+      "ground_truths": [
+        "Michael Moriarty"
+      ],
+      "correct": true,
+      "explanation": "The student answer \"Michael Moriarty\" exactly matches the ground truth answer.",
+      "raw_judge_response": "CORRECT: The student answer \"Michael Moriarty\" exactly matches the ground truth answer."
+    },
+    {
+      "id": "nq_validation_14",
+      "question": "who does the voice of nala in the lion king?",
+      "student_answer": "Moira Kelly",
+      "ground_truths": [
+        "Niketa Calame",
+        "Sally Dworsky",
+        "Moira Kelly",
+        "Laura Williams"
+      ],
+      "correct": true,
+      "explanation": "The student answer \"Moira Kelly\" is one of the listed ground truth answers for the voice of Nala in The Lion King.",
+      "raw_judge_response": "CORRECT: The student answer \"Moira Kelly\" is one of the listed ground truth answers for the voice of Nala in The Lion King."
+    },
+    {
+      "id": "nq_validation_15",
+      "question": "who plays gram on the young and the restless?",
+      "student_answer": "Beth Maitland",
+      "ground_truths": [
+        "Max Shippee"
+      ],
+      "correct": false,
+      "explanation": "The student answer \"Beth Maitland\" is factually wrong. The ground truth states the actor is \"Max Shippee\".",
+      "raw_judge_response": "INCORRECT: The student answer \"Beth Maitland\" is factually wrong. The ground truth states the actor is \"Max Shippee\"."
+    },
+    {
+      "id": "nq_validation_16",
+      "question": "what is the oath that new citizens take?",
+      "student_answer": "Oath of Allegiance",
+      "ground_truths": [
+        "United States Oath of Allegiance"
+      ],
+      "correct": true,
+      "explanation": "\"Oath of Allegiance\" is the common, abbreviated name for the \"United States Oath of Allegiance\" and contains the same core factual information.",
+      "raw_judge_response": "CORRECT: \"Oath of Allegiance\" is the common, abbreviated name for the \"United States Oath of Allegiance\" and contains the same core factual information."
+    },
+    {
+      "id": "nq_validation_17",
+      "question": "who is under the mask of darth vader?",
+      "student_answer": "Anakin Skywalker",
+      "ground_truths": [
+        "Anakin Skywalker"
+      ],
+      "correct": true,
+      "explanation": "The student answer \"Anakin Skywalker\" is a direct and exact match to the ground truth answer.",
+      "raw_judge_response": "CORRECT: The student answer \"Anakin Skywalker\" is a direct and exact match to the ground truth answer."
+    },
+    {
+      "id": "nq_validation_18",
+      "question": "who had a baby at 100 in the bible?",
+      "student_answer": "Sarah",
+      "ground_truths": [
+        "Sarah",
+        "Abraham"
+      ],
+      "correct": true,
+      "explanation": "The student answer \"Sarah\" matches one of the ground truth answers and contains the same factual information.",
+      "raw_judge_response": "CORRECT: The student answer \"Sarah\" matches one of the ground truth answers and contains the same factual information."
+    },
+    {
+      "id": "nq_validation_19",
+      "question": "what age do you need to be to buy a bb gun?",
+      "student_answer": "eighteen",
+      "ground_truths": [
+        "18"
+      ],
+      "correct": true,
+      "explanation": "The student's answer \"eighteen\" is semantically equivalent to the ground truth \"18\", as both express the same numerical age.",
+      "raw_judge_response": "CORRECT: The student's answer \"eighteen\" is semantically equivalent to the ground truth \"18\", as both express the same numerical age."
+    },
+    {
+      "id": "nq_validation_20",
+      "question": "ethiopia flight 961 crashes in to the sea?",
+      "student_answer": "1996",
+      "ground_truths": [
+        "23 November 1996"
+      ],
+      "correct": true,
+      "explanation": "The student answer \"1996\" is a correct subset of the more specific ground truth date \"23 November 1996\". The year is the key factual information, and minor omissions of the day and month are acceptable.",
+      "raw_judge_response": "CORRECT: The student answer \"1996\" is a correct subset of the more specific ground truth date \"23 November 1996\". The year is the key factual information, and minor omissions of the day and month are acceptable."
+    },
+    {
+      "id": "nq_validation_21",
+      "question": "where was percy jackson and the olympians filmed?",
+      "student_answer": "Vancouver, Canada",
+      "ground_truths": [
+        "Vancouver",
+        "Mission, British Columbia"
+      ],
+      "correct": true,
+      "explanation": "The student's answer \"Vancouver, Canada\" contains the same factual information as the ground truth answer \"Vancouver\". Specifying the country is a minor, acceptable addition that does not change the core fact.",
+      "raw_judge_response": "CORRECT: The student's answer \"Vancouver, Canada\" contains the same factual information as the ground truth answer \"Vancouver\". Specifying the country is a minor, acceptable addition that does not change the core fact."
+    },
+    {
+      "id": "nq_validation_22",
+      "question": "how many seasons of vampire diaries r there?",
+      "student_answer": "eight",
+      "ground_truths": [
+        "eight",
+        "8"
+      ],
+      "correct": true,
+      "explanation": "The student's answer \"eight\" is semantically equivalent to the ground truth answers \"eight\" and \"8\".",
+      "raw_judge_response": "CORRECT: The student's answer \"eight\" is semantically equivalent to the ground truth answers \"eight\" and \"8\"."
+    },
+    {
+      "id": "nq_validation_23",
+      "question": "how many episodes are there in dragon ball z?",
+      "student_answer": "291",
+      "ground_truths": [
+        "291 episodes",
+        "291"
+      ],
+      "correct": true,
+      "explanation": "The student's answer \"291\" exactly matches one of the acceptable ground truth answers.",
+      "raw_judge_response": "CORRECT: The student's answer \"291\" exactly matches one of the acceptable ground truth answers."
+    },
+    {
+      "id": "nq_validation_24",
+      "question": "who plays auggie in the movie the wonder?",
+      "student_answer": "Jacob Tremblay",
+      "ground_truths": [
+        "Jacob Tremblay"
+      ],
+      "correct": true,
+      "explanation": "The student answer \"Jacob Tremblay\" exactly matches the ground truth answer.",
+      "raw_judge_response": "CORRECT: The student answer \"Jacob Tremblay\" exactly matches the ground truth answer."
+    },
+    {
+      "id": "nq_validation_25",
+      "question": "when was the first australian prime minister elected?",
+      "student_answer": "January 1901",
+      "ground_truths": [
+        "Sir Edmund Barton",
+        "1901"
+      ],
+      "correct": true,
+      "explanation": "The student's answer \"January 1901\" provides the correct year (1901) which matches the ground truth. While it adds the specific month, this does not contradict the factual information that the event occurred in 1901.",
+      "raw_judge_response": "CORRECT: The student's answer \"January 1901\" provides the correct year (1901) which matches the ground truth. While it adds the specific month, this does not contradict the factual information that the event occurred in 1901."
+    },
+    {
+      "id": "nq_validation_26",
+      "question": "who plays matthew on anne with an e?",
+      "student_answer": "R.H. Thomson",
+      "ground_truths": [
+        "R. H. Thomson"
+      ],
+      "correct": true,
+      "explanation": "The student's answer \"R.H. Thomson\" is a minor formatting variation of the ground truth \"R. H. Thomson\" and refers to the same person.",
+      "raw_judge_response": "CORRECT: The student's answer \"R.H. Thomson\" is a minor formatting variation of the ground truth \"R. H. Thomson\" and refers to the same person."
+    },
+    {
+      "id": "nq_validation_27",
+      "question": "who is the girl in green day 21 guns?",
+      "student_answer": "Miranda Cosgrove",
+      "ground_truths": [
+        "Lisa Stelly"
+      ],
+      "correct": false,
+      "explanation": "The student answer \"Miranda Cosgrove\" is factually wrong. The girl in the \"21 Guns\" music video is actress Lisa Stelly.",
+      "raw_judge_response": "INCORRECT: The student answer \"Miranda Cosgrove\" is factually wrong. The girl in the \"21 Guns\" music video is actress Lisa Stelly."
+    },
+    {
+      "id": "nq_validation_28",
+      "question": "who plays joker in batman the dark knight?",
+      "student_answer": "Heath Ledger",
+      "ground_truths": [
+        "Ledger"
+      ],
+      "correct": true,
+      "explanation": "\"Heath Ledger\" contains the same factual information as the ground truth answer \"Ledger\" and provides the full name of the actor.",
+      "raw_judge_response": "CORRECT: \"Heath Ledger\" contains the same factual information as the ground truth answer \"Ledger\" and provides the full name of the actor."
+    },
+    {
+      "id": "nq_validation_29",
+      "question": "when was the south asian association for regional co-operation (saarc) formed?",
+      "student_answer": "December 1985",
+      "ground_truths": [
+        "December 1985",
+        "8 December 1985"
+      ],
+      "correct": true,
+      "explanation": "The student's answer \"December 1985\" contains the same core factual information (month and year) as the ground truth answers \"December 1985\" and \"8 December 1985\". The specific day is not required for the answer to be considered correct.",
+      "raw_judge_response": "CORRECT: The student's answer \"December 1985\" contains the same core factual information (month and year) as the ground truth answers \"December 1985\" and \"8 December 1985\". The specific day is not required for the answer to be considered correct."
+    },
+    {
+      "id": "nq_validation_30",
+      "question": "when was the first hunger games book published?",
+      "student_answer": "September 2008",
+      "ground_truths": [
+        "September 14, 2008",
+        "2008"
+      ],
+      "correct": true,
+      "explanation": "The student's answer \"September 2008\" is semantically equivalent to the ground truth \"2008\" and provides more specific, correct information. The exact day is not required for the answer to be considered correct.",
+      "raw_judge_response": "CORRECT: The student's answer \"September 2008\" is semantically equivalent to the ground truth \"2008\" and provides more specific, correct information. The exact day is not required for the answer to be considered correct."
+    },
+    {
+      "id": "nq_validation_31",
+      "question": "who did bette midler portray in the rose?",
+      "student_answer": "Mary Rose Foster",
+      "ground_truths": [
+        "Mary Rose Foster"
+      ],
+      "correct": true,
+      "explanation": "The student answer \"Mary Rose Foster\" exactly matches the ground truth answer.",
+      "raw_judge_response": "CORRECT: The student answer \"Mary Rose Foster\" exactly matches the ground truth answer."
+    },
+    {
+      "id": "nq_validation_32",
+      "question": "who is the lead singer of depeche mode?",
+      "student_answer": "Dave Gahan",
+      "ground_truths": [
+        "David Gahan"
+      ],
+      "correct": true,
+      "explanation": "\"Dave Gahan\" is a common, well-known nickname and shortened form of the full name \"David Gahan.\" They refer to the same person and contain the same factual information.",
+      "raw_judge_response": "CORRECT: \"Dave Gahan\" is a common, well-known nickname and shortened form of the full name \"David Gahan.\" They refer to the same person and contain the same factual information."
+    },
+    {
+      "id": "nq_validation_33",
+      "question": "where did the butchers in the slaughterhouse cases live?",
+      "student_answer": "New Orleans",
+      "ground_truths": [
+        "New Orleans"
+      ],
+      "correct": true,
+      "explanation": "The student's answer \"New Orleans\" exactly matches the ground truth answer.",
+      "raw_judge_response": "CORRECT: The student's answer \"New Orleans\" exactly matches the ground truth answer."
+    },
+    {
+      "id": "nq_validation_34",
+      "question": "who developed the concept of total quality management?",
+      "student_answer": "W. Edwards Deming",
+      "ground_truths": [
+        "W. Edwards Deming"
+      ],
+      "correct": true,
+      "explanation": "The student answer \"W. Edwards Deming\" exactly matches the ground truth answer.",
+      "raw_judge_response": "CORRECT: The student answer \"W. Edwards Deming\" exactly matches the ground truth answer."
+    },
+    {
+      "id": "nq_validation_35",
+      "question": "who wrote cant get you out of my head lyrics?",
+      "student_answer": "Kylie Minogue",
+      "ground_truths": [
+        "Cathy Dennis and Rob Davis",
+        "Rob Davis",
+        "Cathy Dennis"
+      ],
+      "correct": false,
+      "explanation": "The student answer \"Kylie Minogue\" is factually wrong. The ground truth answers identify the songwriters as Cathy Dennis and Rob Davis. Kylie Minogue performed the song but did not write it.",
+      "raw_judge_response": "INCORRECT: The student answer \"Kylie Minogue\" is factually wrong. The ground truth answers identify the songwriters as Cathy Dennis and Rob Davis. Kylie Minogue performed the song but did not write it."
+    },
+    {
+      "id": "nq_validation_36",
+      "question": "where does no game no life anime end?",
+      "student_answer": "Volume three",
+      "ground_truths": [
+        "the Elkia Federation",
+        "the sixth volume"
+      ],
+      "correct": false,
+      "explanation": "The student answer \"Volume three\" refers to a light novel volume, while the ground truth answers \"the Elkia Federation\" and \"the sixth volume\" refer to the in-universe location and the correct light novel volume, respectively. The student's answer is factually wrong.",
+      "raw_judge_response": "INCORRECT: The student answer \"Volume three\" refers to a light novel volume, while the ground truth answers \"the Elkia Federation\" and \"the sixth volume\" refer to the in-universe location and the correct light novel volume, respectively. The student's answer is factually wrong."
+    },
+    {
+      "id": "nq_validation_37",
+      "question": "when did taylor swift's first album release?",
+      "student_answer": "October 2006",
+      "ground_truths": [
+        "October 24, 2006",
+        "2005"
+      ],
+      "correct": false,
+      "explanation": "The student answer \"October 2006\" is too vague. While the month is correct, the ground truth specifies the year as 2005. The other ground truth, \"October 24, 2006,\" provides a specific date within that month and year, but the student's answer lacks the necessary year precision to match either correct option.",
+      "raw_judge_response": "INCORRECT: The student answer \"October 2006\" is too vague. While the month is correct, the ground truth specifies the year as 2005. The other ground truth, \"October 24, 2006,\" provides a specific date within that month and year, but the student's answer lacks the necessary year precision to match either correct option."
+    },
+    {
+      "id": "nq_validation_38",
+      "question": "what are the three fifty shades of grey books?",
+      "student_answer": "Fifty Shades of Grey, Fifty Shades Darker, Fifty Shades Freed",
+      "ground_truths": [
+        "Fifty Shades of Grey",
+        "Fifty Shades Darker",
+        "Fifty Shades Freed"
+      ],
+      "correct": true,
+      "explanation": "The student's answer lists all three book titles exactly as they appear in the ground truth answers.",
+      "raw_judge_response": "CORRECT: The student's answer lists all three book titles exactly as they appear in the ground truth answers."
+    },
+    {
+      "id": "nq_validation_39",
+      "question": "who has the power (judicial) to make decisions in courts of law?",
+      "student_answer": "judges",
+      "ground_truths": [
+        "judges"
+      ],
+      "correct": true,
+      "explanation": "The student's answer \"judges\" is an exact match to the ground truth answer \"judges\" and contains the same factual information.",
+      "raw_judge_response": "CORRECT: The student's answer \"judges\" is an exact match to the ground truth answer \"judges\" and contains the same factual information."
+    },
+    {
+      "id": "nq_validation_40",
+      "question": "what are the ranks in the us navy?",
+      "student_answer": "Seaman Recruit, Seaman Apprentice, Seaman, Petty Officer Third Class, Petty Officer Second Class, Petty Officer First Class, Chief Petty Officer, Senior Chief Petty Officer, Master Chief Petty Officer, Fleet/Force Master Chief Petty Officer, Master Chief Petty Officer of the Navy, Warrant Officer 1, Chief Warrant Officer 2, Chief Warrant Officer 3, Chief Warrant Officer 4, Chief Warrant Officer 5, Ensign, Lieutenant Junior Grade, Lieutenant, Lieutenant Commander, Commander, Captain, Rear Admiral Lower Half, Rear Admiral, Vice Admiral, Admiral, Fleet Admiral",
+      "ground_truths": [
+        "E-8s senior chief petty officer",
+        "E-9s master chief petty officer"
+      ],
+      "correct": false,
+      "explanation": "The student's answer is a comprehensive list of all US Navy ranks, while the ground truth answers are specific examples of two individual ranks (E-8 and E-9). The student's answer does not specifically mention or highlight the ranks \"E-8s senior chief petty officer\" or \"E-9s master chief petty officer\" as the ground truth requires.",
+      "raw_judge_response": "INCORRECT: The student's answer is a comprehensive list of all US Navy ranks, while the ground truth answers are specific examples of two individual ranks (E-8 and E-9). The student's answer does not specifically mention or highlight the ranks \"E-8s senior chief petty officer\" or \"E-9s master chief petty officer\" as the ground truth requires."
+    },
+    {
+      "id": "nq_validation_41",
+      "question": "i was a great islamic scholar and mathematician who died in 1131 ce?",
+      "student_answer": "Omar Khayyam",
+      "ground_truths": [
+        "Omar Khayyam"
+      ],
+      "correct": true,
+      "explanation": "The student's answer \"Omar Khayyam\" is an exact match for the ground truth answer. Omar Khayyam was a renowned Islamic scholar and mathematician who died in 1131 CE.",
+      "raw_judge_response": "CORRECT: The student's answer \"Omar Khayyam\" is an exact match for the ground truth answer. Omar Khayyam was a renowned Islamic scholar and mathematician who died in 1131 CE."
+    },
+    {
+      "id": "nq_validation_42",
+      "question": "who is the coach for the ottawa senators?",
+      "student_answer": "Travis Green",
+      "ground_truths": [
+        "Guy Boucher"
+      ],
+      "correct": false,
+      "explanation": "The ground truth answer is Guy Boucher, while the student answered Travis Green. These are two different people, so the factual information is wrong.",
+      "raw_judge_response": "INCORRECT: The ground truth answer is Guy Boucher, while the student answered Travis Green. These are two different people, so the factual information is wrong."
+    },
+    {
+      "id": "nq_validation_43",
+      "question": "last episode of what happens to my family?",
+      "student_answer": "January 2015",
+      "ground_truths": [
+        "53"
+      ],
+      "correct": false,
+      "explanation": "The ground truth answer \"53\" refers to the episode number of the final episode. The student's answer \"January 2015\" is a date, which is different factual information and does not match the requested data.",
+      "raw_judge_response": "INCORRECT: The ground truth answer \"53\" refers to the episode number of the final episode. The student's answer \"January 2015\" is a date, which is different factual information and does not match the requested data."
+    },
+    {
+      "id": "nq_validation_44",
+      "question": "when is the last time the vikings were in the nfc championship?",
+      "student_answer": "January 2018",
+      "ground_truths": [
+        "1976",
+        "2017/18"
+      ],
+      "correct": true,
+      "explanation": "The student answer \"January 2018\" is semantically equivalent to the ground truth \"2017/18\", as the NFC Championship game for the 2017-18 NFL season was played in January 2018.",
+      "raw_judge_response": "CORRECT: The student answer \"January 2018\" is semantically equivalent to the ground truth \"2017/18\", as the NFC Championship game for the 2017-18 NFL season was played in January 2018."
+    },
+    {
+      "id": "nq_validation_45",
+      "question": "what are the colors of the netherlands flag?",
+      "student_answer": "red, white, blue",
+      "ground_truths": [
+        "blue",
+        "white",
+        "red"
+      ],
+      "correct": true,
+      "explanation": "The student's answer \"red, white, blue\" contains all the colors listed in the ground truth answers (\"blue\", \"white\", \"red\") and presents them in the correct factual combination for the Netherlands flag.",
+      "raw_judge_response": "CORRECT: The student's answer \"red, white, blue\" contains all the colors listed in the ground truth answers (\"blue\", \"white\", \"red\") and presents them in the correct factual combination for the Netherlands flag."
+    },
+    {
+      "id": "nq_validation_46",
+      "question": "where is lord's prayer found in bible?",
+      "student_answer": "Matthew 6:9-13 and Luke 11:2-4",
+      "ground_truths": [
+        "in the Gospel of Luke"
+      ],
+      "correct": false,
+      "explanation": "The student answer includes Matthew 6:9-13, which is not part of the ground truth. While Luke 11:2-4 is correct, the addition of an incorrect location makes the overall answer factually wrong.",
+      "raw_judge_response": "INCORRECT: The student answer includes Matthew 6:9-13, which is not part of the ground truth. While Luke 11:2-4 is correct, the addition of an incorrect location makes the overall answer factually wrong."
+    },
+    {
+      "id": "nq_validation_47",
+      "question": "when was the last time oklahoma won a national championship in football?",
+      "student_answer": "2000",
+      "ground_truths": [
+        "2003",
+        "2000"
+      ],
+      "correct": true,
+      "explanation": "The student answer \"2000\" matches one of the provided ground truth answers.",
+      "raw_judge_response": "CORRECT: The student answer \"2000\" matches one of the provided ground truth answers."
+    },
+    {
+      "id": "nq_validation_48",
+      "question": "location of the ten commandments in the bible?",
+      "student_answer": "Exodus 20",
+      "ground_truths": [
+        "Exodus",
+        "Deuteronomy"
+      ],
+      "correct": true,
+      "explanation": "The student's answer \"Exodus 20\" is a specific chapter within the book of \"Exodus\", which is one of the valid ground truth answers. It provides the same core factual information.",
+      "raw_judge_response": "CORRECT: The student's answer \"Exodus 20\" is a specific chapter within the book of \"Exodus\", which is one of the valid ground truth answers. It provides the same core factual information."
+    },
+    {
+      "id": "nq_validation_49",
+      "question": "where did the allies go after north africa?",
+      "student_answer": "Sicily",
+      "ground_truths": [
+        "Italy",
+        "the Italian Campaign"
+      ],
+      "correct": true,
+      "explanation": "The student's answer \"Sicily\" is a specific part of the larger \"Italian Campaign\" and the invasion of Sicily was the immediate next major Allied operation after the conclusion of the North African campaign, directly preceding the invasion of mainland Italy.",
+      "raw_judge_response": "CORRECT: The student's answer \"Sicily\" is a specific part of the larger \"Italian Campaign\" and the invasion of Sicily was the immediate next major Allied operation after the conclusion of the North African campaign, directly preceding the invasion of mainland Italy."
+    },
+    {
+      "id": "nq_validation_50",
+      "question": "what is the meaning of veronica in english?",
+      "student_answer": "true image",
+      "ground_truths": [
+        "she who brings victory"
+      ],
+      "correct": false,
+      "explanation": "The ground truth answer is \"she who brings victory,\" while the student answered \"true image,\" which is a different and incorrect meaning.",
+      "raw_judge_response": "INCORRECT: The ground truth answer is \"she who brings victory,\" while the student answered \"true image,\" which is a different and incorrect meaning."
+    },
+    {
+      "id": "nq_validation_51",
+      "question": "what is the name of the main artery which takes blood from the heart to the body?",
+      "student_answer": "aorta",
+      "ground_truths": [
+        "The aorta",
+        "aorta"
+      ],
+      "correct": true,
+      "explanation": "The student's answer \"aorta\" contains the same factual information as the ground truth answers \"The aorta\" and \"aorta\". The minor formatting difference of omitting the article \"The\" is acceptable.",
+      "raw_judge_response": "CORRECT: The student's answer \"aorta\" contains the same factual information as the ground truth answers \"The aorta\" and \"aorta\". The minor formatting difference of omitting the article \"The\" is acceptable."
+    },
+    {
+      "id": "nq_validation_52",
+      "question": "who played solomon in little house on the prairie?",
+      "student_answer": "Stan Ivar",
+      "ground_truths": [
+        "Todd Bridges"
+      ],
+      "correct": false,
+      "explanation": "The student answer \"Stan Ivar\" is factually wrong. The actor who played Solomon was Todd Bridges.",
+      "raw_judge_response": "INCORRECT: The student answer \"Stan Ivar\" is factually wrong. The actor who played Solomon was Todd Bridges."
+    },
+    {
+      "id": "nq_validation_53",
+      "question": "who does eric end up with in that 70s show?",
+      "student_answer": "Donna Pinciotti",
+      "ground_truths": [
+        "Donna"
+      ],
+      "correct": true,
+      "explanation": "The student answer \"Donna Pinciotti\" is a more specific version of the ground truth answer \"Donna,\" referring to the same character.",
+      "raw_judge_response": "CORRECT: The student answer \"Donna Pinciotti\" is a more specific version of the ground truth answer \"Donna,\" referring to the same character."
+    },
+    {
+      "id": "nq_validation_54",
+      "question": "an object that moves around an external axis is said to be?",
+      "student_answer": "revolving",
+      "ground_truths": [
+        "revolution or orbital revolution",
+        "orbit"
+      ],
+      "correct": true,
+      "explanation": "The student's answer \"revolving\" is semantically equivalent to \"revolution,\" which is one of the acceptable ground truth answers.",
+      "raw_judge_response": "CORRECT: The student's answer \"revolving\" is semantically equivalent to \"revolution,\" which is one of the acceptable ground truth answers."
+    },
+    {
+      "id": "nq_validation_55",
+      "question": "architectural elements forming rib vaults eg wells cathedral?",
+      "student_answer": "ribs",
+      "ground_truths": [
+        "an armature of piped masonry",
+        "barrel vaults",
+        "two to three barrel vaults"
+      ],
+      "correct": false,
+      "explanation": "The student answer \"ribs\" is too vague and incomplete. The ground truth answers specify that the architectural elements are \"an armature of piped masonry\" or \"barrel vaults,\" which are the specific structural components that form the rib vaults. \"Ribs\" alone does not convey the same structural concept or factual information.",
+      "raw_judge_response": "INCORRECT: The student answer \"ribs\" is too vague and incomplete. The ground truth answers specify that the architectural elements are \"an armature of piped masonry\" or \"barrel vaults,\" which are the specific structural components that form the rib vaults. \"Ribs\" alone does not convey the same structural concept or factual information."
+    },
+    {
+      "id": "nq_validation_56",
+      "question": "who sang the song good morning good morning?",
+      "student_answer": "The Beatles",
+      "ground_truths": [
+        "Gene Kelly",
+        "Donald O'Connor",
+        "Judy Garland",
+        "Debbie Reynolds",
+        "Mickey Rooney"
+      ],
+      "correct": false,
+      "explanation": "The student answer \"The Beatles\" is factually wrong. The song \"Good Morning Good Morning\" was indeed performed by The Beatles, but the ground truth answers refer to performers of a different song with a similar title, likely from the musical \"Singin' in the Rain.\"",
+      "raw_judge_response": "INCORRECT: The student answer \"The Beatles\" is factually wrong. The song \"Good Morning Good Morning\" was indeed performed by The Beatles, but the ground truth answers refer to performers of a different song with a similar title, likely from the musical \"Singin' in the Rain.\""
+    },
+    {
+      "id": "nq_validation_57",
+      "question": "who wrote papa got a brand new bag?",
+      "student_answer": "James Brown",
+      "ground_truths": [
+        "James Brown"
+      ],
+      "correct": true,
+      "explanation": "The student answer \"James Brown\" exactly matches the ground truth answer \"James Brown\".",
+      "raw_judge_response": "CORRECT: The student answer \"James Brown\" exactly matches the ground truth answer \"James Brown\"."
+    },
+    {
+      "id": "nq_validation_58",
+      "question": "where does a roadrunner live in the desert?",
+      "student_answer": "Southwestern United States and Mexico",
+      "ground_truths": [
+        "mountainous shrubland",
+        "arid lowland"
+      ],
+      "correct": false,
+      "explanation": "The student answer provides a geographical region (Southwestern United States and Mexico), while the ground truth answers specify the type of habitat within that region (mountainous shrubland, arid lowland). The student's answer is too vague and does not contain the specific factual information about the habitat.",
+      "raw_judge_response": "INCORRECT: The student answer provides a geographical region (Southwestern United States and Mexico), while the ground truth answers specify the type of habitat within that region (mountainous shrubland, arid lowland). The student's answer is too vague and does not contain the specific factual information about the habitat."
+    },
+    {
+      "id": "nq_validation_59",
+      "question": "who wrote it's a long long way to pasadena?",
+      "student_answer": "The Mills Brothers",
+      "ground_truths": [
+        "John Young",
+        "Harry Vanda",
+        "David Hemmings",
+        "George Young"
+      ],
+      "correct": false,
+      "explanation": "The student answer \"The Mills Brothers\" is a different musical group and does not match any of the provided ground truth answers, which are the song's writers (John Young, Harry Vanda, David Hemmings, George Young).",
+      "raw_judge_response": "INCORRECT: The student answer \"The Mills Brothers\" is a different musical group and does not match any of the provided ground truth answers, which are the song's writers (John Young, Harry Vanda, David Hemmings, George Young)."
+    },
+    {
+      "id": "nq_validation_60",
+      "question": "what's the dog's name on tom and jerry?",
+      "student_answer": "Spike",
+      "ground_truths": [
+        "Spike"
+      ],
+      "correct": true,
+      "explanation": "The student answer \"Spike\" exactly matches the ground truth answer \"Spike\".",
+      "raw_judge_response": "CORRECT: The student answer \"Spike\" exactly matches the ground truth answer \"Spike\"."
+    },
+    {
+      "id": "nq_validation_61",
+      "question": "who are nominated for president of india 2017?",
+      "student_answer": "Ram Nath Kovind",
+      "ground_truths": [
+        "Meira Kumar",
+        "Ram Nath Kovind"
+      ],
+      "correct": true,
+      "explanation": "The student answer \"Ram Nath Kovind\" is one of the two correct candidates listed in the ground truth.",
+      "raw_judge_response": "CORRECT: The student answer \"Ram Nath Kovind\" is one of the two correct candidates listed in the ground truth."
+    },
+    {
+      "id": "nq_validation_62",
+      "question": "where does the path train stop in newark?",
+      "student_answer": "Newark Penn Station",
+      "ground_truths": [
+        "Newark Penn Station"
+      ],
+      "correct": true,
+      "explanation": "The student answer \"Newark Penn Station\" is an exact match for the ground truth answer.",
+      "raw_judge_response": "CORRECT: The student answer \"Newark Penn Station\" is an exact match for the ground truth answer."
+    },
+    {
+      "id": "nq_validation_63",
+      "question": "where does route 66 start on the west coast?",
+      "student_answer": "Santa Monica",
+      "ground_truths": [
+        "in Santa Monica"
+      ],
+      "correct": true,
+      "explanation": "The student answer \"Santa Monica\" contains the same factual information as the ground truth answer \"in Santa Monica\". The minor difference in phrasing (omitting the preposition \"in\") does not change the core meaning.",
+      "raw_judge_response": "CORRECT: The student answer \"Santa Monica\" contains the same factual information as the ground truth answer \"in Santa Monica\". The minor difference in phrasing (omitting the preposition \"in\") does not change the core meaning."
+    },
+    {
+      "id": "nq_validation_64",
+      "question": "who is the first wife on sister wives?",
+      "student_answer": "Meri Brown",
+      "ground_truths": [
+        "Meri"
+      ],
+      "correct": true,
+      "explanation": "The student answer \"Meri Brown\" contains the same factual information as the ground truth answer \"Meri\". The addition of the surname \"Brown\" is a minor, acceptable detail that does not change the core fact.",
+      "raw_judge_response": "CORRECT: The student answer \"Meri Brown\" contains the same factual information as the ground truth answer \"Meri\". The addition of the surname \"Brown\" is a minor, acceptable detail that does not change the core fact."
+    },
+    {
+      "id": "nq_validation_65",
+      "question": "when did houston go to the american league?",
+      "student_answer": "2013",
+      "ground_truths": [
+        "2013"
+      ],
+      "correct": true,
+      "explanation": "The student's answer \"2013\" exactly matches the ground truth answer \"2013\".",
+      "raw_judge_response": "CORRECT: The student's answer \"2013\" exactly matches the ground truth answer \"2013\"."
+    },
+    {
+      "id": "nq_validation_66",
+      "question": "when did they stop cigarette advertising on television?",
+      "student_answer": "1971",
+      "ground_truths": [
+        "January 2, 1971",
+        "1970"
+      ],
+      "correct": true,
+      "explanation": "The student's answer \"1971\" matches the year specified in one of the ground truth answers (\"January 2, 1971\"). The day and month are not required for the answer to be factually correct.",
+      "raw_judge_response": "CORRECT: The student's answer \"1971\" matches the year specified in one of the ground truth answers (\"January 2, 1971\"). The day and month are not required for the answer to be factually correct."
+    },
+    {
+      "id": "nq_validation_67",
+      "question": "coldplay song i will try to fix you?",
+      "student_answer": "Fix You",
+      "ground_truths": [
+        "\"Fix You\""
+      ],
+      "correct": true,
+      "explanation": "The student's answer \"Fix You\" exactly matches the ground truth answer \"\"Fix You\"\", providing the same factual information.",
+      "raw_judge_response": "CORRECT: The student's answer \"Fix You\" exactly matches the ground truth answer \"\"Fix You\"\", providing the same factual information."
+    },
+    {
+      "id": "nq_validation_68",
+      "question": "points on a sphere or angles in a circle are measured in units called?",
+      "student_answer": "radians",
+      "ground_truths": [
+        "radians"
+      ],
+      "correct": true,
+      "explanation": "The student's answer \"radians\" exactly matches the ground truth answer.",
+      "raw_judge_response": "CORRECT: The student's answer \"radians\" exactly matches the ground truth answer."
+    },
+    {
+      "id": "nq_validation_69",
+      "question": "the oligodynamic effect is a phenomenon that describes?",
+      "student_answer": "antimicrobial effect of metal ions",
+      "ground_truths": [
+        "a biocidal effect of metals"
+      ],
+      "correct": true,
+      "explanation": "The student's answer \"antimicrobial effect of metal ions\" is semantically equivalent to the ground truth \"a biocidal effect of metals,\" as both describe the destructive effect of metal ions on microorganisms.",
+      "raw_judge_response": "CORRECT: The student's answer \"antimicrobial effect of metal ions\" is semantically equivalent to the ground truth \"a biocidal effect of metals,\" as both describe the destructive effect of metal ions on microorganisms."
+    },
+    {
+      "id": "nq_validation_70",
+      "question": "where does the white witch live in narnia?",
+      "student_answer": "Charn",
+      "ground_truths": [
+        "her castle"
+      ],
+      "correct": false,
+      "explanation": "The White Witch's castle is in Narnia, but it is not in a place called Charn. Charn is the dead world from which Jadis (the White Witch) originated before she entered Narnia.",
+      "raw_judge_response": "INCORRECT: The White Witch's castle is in Narnia, but it is not in a place called Charn. Charn is the dead world from which Jadis (the White Witch) originated before she entered Narnia."
+    },
+    {
+      "id": "nq_validation_71",
+      "question": "how many games in a row have the uconn women's basketball team won?",
+      "student_answer": "one hundred and eleven",
+      "ground_truths": [
+        "111 straight wins",
+        "111",
+        "90"
+      ],
+      "correct": true,
+      "explanation": "The student answer \"one hundred and eleven\" is semantically equivalent to the ground truth answer \"111\".",
+      "raw_judge_response": "CORRECT: The student answer \"one hundred and eleven\" is semantically equivalent to the ground truth answer \"111\"."
+    },
+    {
+      "id": "nq_validation_72",
+      "question": "is there a name for the at symbol?",
+      "student_answer": "at sign",
+      "ground_truths": [
+        "commercial at",
+        "at symbol",
+        "at sign"
+      ],
+      "correct": true,
+      "explanation": "The student answer \"at sign\" is semantically equivalent to one of the provided ground truth answers.",
+      "raw_judge_response": "CORRECT: The student answer \"at sign\" is semantically equivalent to one of the provided ground truth answers."
+    },
+    {
+      "id": "nq_validation_73",
+      "question": "who sings the theme song for the tv show cops?",
+      "student_answer": "Inner Circle",
+      "ground_truths": [
+        "Inner Circle",
+        "Jamaican reggae band Inner Circle"
+      ],
+      "correct": true,
+      "explanation": "The student answer \"Inner Circle\" matches the ground truth answer \"Inner Circle\" exactly and provides the same factual information.",
+      "raw_judge_response": "CORRECT: The student answer \"Inner Circle\" matches the ground truth answer \"Inner Circle\" exactly and provides the same factual information."
+    },
+    {
+      "id": "nq_validation_74",
+      "question": "when was corporal punishment banned in south africa?",
+      "student_answer": "1997",
+      "ground_truths": [
+        "1997"
+      ],
+      "correct": true,
+      "explanation": "The student's answer \"1997\" exactly matches the provided ground truth answer.",
+      "raw_judge_response": "CORRECT: The student's answer \"1997\" exactly matches the provided ground truth answer."
+    },
+    {
+      "id": "nq_validation_75",
+      "question": "who plays captain phasma in star wars the force awakens?",
+      "student_answer": "Gwendoline Christie",
+      "ground_truths": [
+        "Gwendoline Christie"
+      ],
+      "correct": true,
+      "explanation": "The student answer \"Gwendoline Christie\" is an exact match for the ground truth answer.",
+      "raw_judge_response": "CORRECT: The student answer \"Gwendoline Christie\" is an exact match for the ground truth answer."
+    },
+    {
+      "id": "nq_validation_76",
+      "question": "who sings she's like the wind lyrics?",
+      "student_answer": "Patrick Swayze",
+      "ground_truths": [
+        "Wendy Fraser",
+        "Patrick Swayze"
+      ],
+      "correct": true,
+      "explanation": "The student answer \"Patrick Swayze\" is one of the artists listed in the ground truth answer.",
+      "raw_judge_response": "CORRECT: The student answer \"Patrick Swayze\" is one of the artists listed in the ground truth answer."
+    },
+    {
+      "id": "nq_validation_77",
+      "question": "when did marathon change its name to snickers?",
+      "student_answer": "1990",
+      "ground_truths": [
+        "19 July 1990"
+      ],
+      "correct": true,
+      "explanation": "The student answer \"1990\" contains the same core factual information (the year) as the ground truth \"19 July 1990\". The omission of the specific day and month is a minor formatting difference and does not change the fundamental correctness of the year.",
+      "raw_judge_response": "CORRECT: The student answer \"1990\" contains the same core factual information (the year) as the ground truth \"19 July 1990\". The omission of the specific day and month is a minor formatting difference and does not change the fundamental correctness of the year."
+    },
+    {
+      "id": "nq_validation_78",
+      "question": "who captained the first european ship to sail around the tip of africa?",
+      "student_answer": "Bartolomeu Dias",
+      "ground_truths": [
+        "Bartolomeu Dias"
+      ],
+      "correct": true,
+      "explanation": "The student answer \"Bartolomeu Dias\" is an exact match for the ground truth answer.",
+      "raw_judge_response": "CORRECT: The student answer \"Bartolomeu Dias\" is an exact match for the ground truth answer."
+    },
+    {
+      "id": "nq_validation_79",
+      "question": "who ordered the forbidden city to be built?",
+      "student_answer": "Yongle Emperor",
+      "ground_truths": [
+        "Zhu Di"
+      ],
+      "correct": true,
+      "explanation": "The Yongle Emperor is the same person as Zhu Di; the former is the era name and the latter is the personal name.",
+      "raw_judge_response": "CORRECT: The Yongle Emperor is the same person as Zhu Di; the former is the era name and the latter is the personal name."
+    },
+    {
+      "id": "nq_validation_80",
+      "question": "who sang let me tell you about the birds and the bees?",
+      "student_answer": "The Jewel Akens",
+      "ground_truths": [
+        "Jewel Akens"
+      ],
+      "correct": true,
+      "explanation": "The student answer \"The Jewel Akens\" is a minor formatting variation of the ground truth \"Jewel Akens\" and contains the same core factual information.",
+      "raw_judge_response": "CORRECT: The student answer \"The Jewel Akens\" is a minor formatting variation of the ground truth \"Jewel Akens\" and contains the same core factual information."
+    },
+    {
+      "id": "nq_validation_81",
+      "question": "who has the power to approve or veto legislation constitution?",
+      "student_answer": "President",
+      "ground_truths": [
+        "the President"
+      ],
+      "correct": true,
+      "explanation": "The student's answer \"President\" contains the same factual information as the ground truth answer \"the President\". The omission of the article \"the\" is a minor formatting difference and does not change the core meaning.",
+      "raw_judge_response": "CORRECT: The student's answer \"President\" contains the same factual information as the ground truth answer \"the President\". The omission of the article \"the\" is a minor formatting difference and does not change the core meaning."
+    },
+    {
+      "id": "nq_validation_82",
+      "question": "how many seasons of the rugrats are there?",
+      "student_answer": "nine",
+      "ground_truths": [
+        "9 seasons",
+        "9"
+      ],
+      "correct": true,
+      "explanation": "The student answer \"nine\" is semantically equivalent to the ground truth answer \"9\".",
+      "raw_judge_response": "CORRECT: The student answer \"nine\" is semantically equivalent to the ground truth answer \"9\"."
+    },
+    {
+      "id": "nq_validation_83",
+      "question": "who is the minister of local government in zimbabwe?",
+      "student_answer": "Daniel Garwe",
+      "ground_truths": [
+        "Hon July Moyo"
+      ],
+      "correct": false,
+      "explanation": "The ground truth answer is \"Hon July Moyo,\" while the student answered \"Daniel Garwe,\" which is a different person and the Minister of National Housing and Social Amenities.",
+      "raw_judge_response": "INCORRECT: The ground truth answer is \"Hon July Moyo,\" while the student answered \"Daniel Garwe,\" which is a different person and the Minister of National Housing and Social Amenities."
+    },
+    {
+      "id": "nq_validation_84",
+      "question": "what was the initial effect of the transition from command to market economies in eastern europe?",
+      "student_answer": "Economic decline",
+      "ground_truths": [
+        "Inequality of opportunity"
+      ],
+      "correct": false,
+      "explanation": "The student answer \"Economic decline\" is a factual outcome of the transition, but it is not semantically equivalent to the ground truth answer \"Inequality of opportunity,\" which identifies a different, more specific initial effect.",
+      "raw_judge_response": "INCORRECT: The student answer \"Economic decline\" is a factual outcome of the transition, but it is not semantically equivalent to the ground truth answer \"Inequality of opportunity,\" which identifies a different, more specific initial effect."
+    },
+    {
+      "id": "nq_validation_85",
+      "question": "when did toyota start making cars in the us?",
+      "student_answer": "1986",
+      "ground_truths": [
+        "by the early 1980s",
+        "1984"
+      ],
+      "correct": false,
+      "explanation": "The student answer \"1986\" is factually incorrect and does not match the provided ground truth answers of \"by the early 1980s\" or \"1984\".",
+      "raw_judge_response": "INCORRECT: The student answer \"1986\" is factually incorrect and does not match the provided ground truth answers of \"by the early 1980s\" or \"1984\"."
+    },
+    {
+      "id": "nq_validation_86",
+      "question": "how many pieces in a terry's chocolate orange?",
+      "student_answer": "twenty",
+      "ground_truths": [
+        "six",
+        "20"
+      ],
+      "correct": true,
+      "explanation": "The student answer \"twenty\" matches the ground truth answer \"20\" semantically, as both represent the same number.",
+      "raw_judge_response": "CORRECT: The student answer \"twenty\" matches the ground truth answer \"20\" semantically, as both represent the same number."
+    },
+    {
+      "id": "nq_validation_87",
+      "question": "who plays the saint of killers on preacher?",
+      "student_answer": "Graham McTavish",
+      "ground_truths": [
+        "Graham McTavish"
+      ],
+      "correct": true,
+      "explanation": "The student answer \"Graham McTavish\" is an exact match for the ground truth answer.",
+      "raw_judge_response": "CORRECT: The student answer \"Graham McTavish\" is an exact match for the ground truth answer."
+    },
+    {
+      "id": "nq_validation_88",
+      "question": "when did the royal proclamation of 1763 end?",
+      "student_answer": "1763",
+      "ground_truths": [
+        "the American Revolutionary War",
+        "with the American Revolutionary War",
+        "1783"
+      ],
+      "correct": false,
+      "explanation": "The Royal Proclamation of 1763 was issued in 1763; it did not end in that same year. It ended with the American Revolutionary War, which concluded in 1783.",
+      "raw_judge_response": "INCORRECT: The Royal Proclamation of 1763 was issued in 1763; it did not end in that same year. It ended with the American Revolutionary War, which concluded in 1783."
+    },
+    {
+      "id": "nq_validation_89",
+      "question": "who is playing the halftime show at super bowl 2016?",
+      "student_answer": "Coldplay, Beyoncé, Bruno Mars",
+      "ground_truths": [
+        "Beyoncé",
+        "Coldplay",
+        "Bruno Mars"
+      ],
+      "correct": true,
+      "explanation": "The student answer lists all three performers (Coldplay, Beyoncé, Bruno Mars) who performed at the halftime show, which matches the provided ground truth answers.",
+      "raw_judge_response": "CORRECT: The student answer lists all three performers (Coldplay, Beyoncé, Bruno Mars) who performed at the halftime show, which matches the provided ground truth answers."
+    },
+    {
+      "id": "nq_validation_90",
+      "question": "jonny cash one piece at a time car?",
+      "student_answer": "Cadillac",
+      "ground_truths": [
+        "Cadillac"
+      ],
+      "correct": true,
+      "explanation": "The student's answer \"Cadillac\" matches the ground truth answer exactly.",
+      "raw_judge_response": "CORRECT: The student's answer \"Cadillac\" matches the ground truth answer exactly."
+    },
+    {
+      "id": "nq_validation_91",
+      "question": "what is the minimum wage in france per hour?",
+      "student_answer": "€11.65 per hour",
+      "ground_truths": [
+        "11.16",
+        "€9.88 per hour."
+      ],
+      "correct": false,
+      "explanation": "The student answer (€11.65) does not match either of the provided ground truth answers (€11.16 or €9.88). This is a factual discrepancy, not a minor formatting difference.",
+      "raw_judge_response": "INCORRECT: The student answer (€11.65) does not match either of the provided ground truth answers (€11.16 or €9.88). This is a factual discrepancy, not a minor formatting difference."
+    },
+    {
+      "id": "nq_validation_92",
+      "question": "describe the three phases of the normal blood clotting process?",
+      "student_answer": "Vasoconstriction, platelet plug formation, coagulation",
+      "ground_truths": [
+        "blood coagulation",
+        "vasoconstriction,"
+      ],
+      "correct": true,
+      "explanation": "The student's answer lists \"Vasoconstriction, platelet plug formation, coagulation,\" which includes the two key phases mentioned in the ground truth (\"vasoconstriction\" and \"coagulation\"). The addition of \"platelet plug formation\" is a correct and more detailed expansion of the process, not a contradiction.",
+      "raw_judge_response": "CORRECT: The student's answer lists \"Vasoconstriction, platelet plug formation, coagulation,\" which includes the two key phases mentioned in the ground truth (\"vasoconstriction\" and \"coagulation\"). The addition of \"platelet plug formation\" is a correct and more detailed expansion of the process, not a contradiction."
+    },
+    {
+      "id": "nq_validation_93",
+      "question": "when did amnesia the dark descent come out?",
+      "student_answer": "September 2010",
+      "ground_truths": [
+        "8 September 2010"
+      ],
+      "correct": true,
+      "explanation": "The student's answer \"September 2010\" is semantically equivalent to the ground truth \"8 September 2010\". Providing the month and year is sufficient, as the specific day is a minor detail.",
+      "raw_judge_response": "CORRECT: The student's answer \"September 2010\" is semantically equivalent to the ground truth \"8 September 2010\". Providing the month and year is sufficient, as the specific day is a minor detail."
+    },
+    {
+      "id": "nq_validation_94",
+      "question": "what is the oldest street in the philippines?",
+      "student_answer": "Colon Street",
+      "ground_truths": [
+        "Cebu City",
+        "Colon Street"
+      ],
+      "correct": true,
+      "explanation": "The student answer \"Colon Street\" is one of the explicitly stated correct ground truth answers.",
+      "raw_judge_response": "CORRECT: The student answer \"Colon Street\" is one of the explicitly stated correct ground truth answers."
+    },
+    {
+      "id": "nq_validation_95",
+      "question": "where is the tibia and fibula bone located?",
+      "student_answer": "lower leg",
+      "ground_truths": [
+        "leg"
+      ],
+      "correct": true,
+      "explanation": "\"Lower leg\" is a more specific but accurate description of the location of the tibia and fibula, which is semantically equivalent to the ground truth answer \"leg.\"",
+      "raw_judge_response": "CORRECT: \"Lower leg\" is a more specific but accurate description of the location of the tibia and fibula, which is semantically equivalent to the ground truth answer \"leg.\""
+    },
+    {
+      "id": "nq_validation_96",
+      "question": "who played bat masterson in the tv series?",
+      "student_answer": "Gene Barry",
+      "ground_truths": [
+        "Gene Barry"
+      ],
+      "correct": true,
+      "explanation": "The student answer \"Gene Barry\" exactly matches the ground truth answer.",
+      "raw_judge_response": "CORRECT: The student answer \"Gene Barry\" exactly matches the ground truth answer."
+    },
+    {
+      "id": "nq_validation_97",
+      "question": "who sings sugar sugar you are my candy girl?",
+      "student_answer": "The Archies",
+      "ground_truths": [
+        "the Archies"
+      ],
+      "correct": true,
+      "explanation": "The student's answer \"The Archies\" matches the ground truth answer \"the Archies\" exactly, with only a minor capitalization difference that is acceptable.",
+      "raw_judge_response": "CORRECT: The student's answer \"The Archies\" matches the ground truth answer \"the Archies\" exactly, with only a minor capitalization difference that is acceptable."
+    },
+    {
+      "id": "nq_validation_98",
+      "question": "types of skiing in the winter olympics 2018?",
+      "student_answer": "Alpine, Cross-Country, Ski Jumping, Nordic Combined, Freestyle, Snowboarding, Biathlon",
+      "ground_truths": [
+        "Slalom",
+        "Downhill",
+        "Super-G",
+        "Giant slalom",
+        "Slalom – (SC)"
+      ],
+      "correct": false,
+      "explanation": "The student answer lists broad categories of skiing sports, while the ground truth answer specifically lists the disciplines within Alpine skiing (Slalom, Downhill, Super-G, Giant slalom). The student's answer does not contain the specific factual information provided in the ground truth.",
+      "raw_judge_response": "INCORRECT: The student answer lists broad categories of skiing sports, while the ground truth answer specifically lists the disciplines within Alpine skiing (Slalom, Downhill, Super-G, Giant slalom). The student's answer does not contain the specific factual information provided in the ground truth."
+    },
+    {
+      "id": "nq_validation_99",
+      "question": "who plays noah newman on the young and the restless?",
+      "student_answer": "Robert Adamson",
+      "ground_truths": [
+        "Robert Gillespie Adamson IV"
+      ],
+      "correct": true,
+      "explanation": "\"Robert Adamson\" is a common and acceptable shortened form of the actor's full name \"Robert Gillespie Adamson IV\" and refers to the same person.",
+      "raw_judge_response": "CORRECT: \"Robert Adamson\" is a common and acceptable shortened form of the actor's full name \"Robert Gillespie Adamson IV\" and refers to the same person."
+    }
+  ]
+}
