@@ -11,6 +11,8 @@ serper_key = os.environ.get('SERPER_API_KEY')
 #deepseek api client
 client = OpenAI(api_key=ds_key, base_url="https://api.deepseek.com")
 
+
+
 def run_search(query):
     conn = http.client.HTTPSConnection("google.serper.dev")
     payload = json.dumps({
@@ -32,6 +34,10 @@ def run_search(query):
         result = result.removesuffix("...")
         final_result += result.strip() + "\n"
     return final_result
+
+
+
+
 
 if __name__ == "__main__":
     print(run_search("who is the president of the United States"))

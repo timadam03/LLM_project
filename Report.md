@@ -65,23 +65,6 @@ Implements logic to generate using both agents, savingthe results in the exact f
 
 ---
 
-
-Results of first round of generations
-
-============================================================
-GRADING RESULTS (EXACT MATCH & F1)
-============================================================
-Total Questions: 100
-Exact Match (EM): 16.00%
-F1 Score: 40.75%
-============================================================
-GRADING RESULTS (LLM-AS-JUDGE)
-============================================================
-Model: deepseek-chat
-Total Questions: 100
-Correct Answers: 73
-Accuracy: 73.00%
-============================================================
 Findings: Model answers good, also searches mulitple times when needed, only need to change system_prompt so the models answers more exact and concise, to pass Exact Match evaluation, therefore give some examples and cut out fillwords,
 maybe also increase the max_steps that the model can take to search
 
@@ -91,5 +74,7 @@ To add serching whole websites serper has website mode where it scrapes the whol
 For the scraping whole website, response structure for Serper API:
 - text: str
 -  metadata: dict
-    - - contains different stuff, always author, sometimes title, og:title etc
+    - contains different stuff, always author, sometimes title, og:title etc
 - credits: int
+
+For improving look at results where it was wrong, change the max_steps, add website reading, etc
