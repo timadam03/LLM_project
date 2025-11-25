@@ -41,3 +41,22 @@ Total Questions: 100
 Correct Answers: 72
 Accuracy: 72.00%
 ============================================================
+
+**Model with search and browsing:**
+- Results for EM score
+============================================================
+GRADING RESULTS (EXACT MATCH & F1)
+============================================================
+Total Questions: 100
+Exact Match (EM): 44.00%
+F1 Score: 60.08%
+============================================================
+- Results for the LLM-as-a-judge:
+============================================================
+GRADING RESULTS (LLM-AS-JUDGE)
+============================================================
+Model: deepseek-chat
+Total Questions: 100
+Correct Answers: 74
+Accuracy: 74.00%
+============================================================

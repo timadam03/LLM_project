@@ -11,4 +11,18 @@ tools_list = [{
             "required": ["query"]
         }
     }
+},
+{
+    "type": "function",
+    "function": {
+        "name": "website_browsing",
+        "description": "Read full content of the website",
+        "parameters": {
+            "type": "object",
+            "properties": {
+                "link": {"type": "string", "description": "The link for the website"}
+            },
+            "required": ["link"]
+        }
+    }
 }]
