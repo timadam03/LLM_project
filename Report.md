@@ -1,7 +1,11 @@
 # LLM Project Report
 
 * **updated:** 24.11 Tim
-* **Status:** Part I/II implementation and evaluation
+* **Status:** Part I:
+- Everything done, exceeded the EM LLM-judge score for both models, only issue is search model has same LLMjudge score as without search
+- Also implemented the trajectory creation so we have the valid trajectory jsonl file the same format as the example
+- Working on implementing the Bonus, so the model can read whole websites using the url
+- Otherwise only improvement of search model needed
 
 ## Setup
 

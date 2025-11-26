@@ -1,13 +1,15 @@
 from api import client
 from tools import tools_list
-from api import run_search
+from api import run_search, browsing
 import json
 
 # Map tool names to functions
 available_tools = {
-    "google_search": run_search
+    "google_search": run_search,
+    "website_browsing": browsing
 }
-system_prompt = """You are a precise, helpful assistant.
+system_prompt = """You are a precise, helpful and reassuring assistant. You can search the web, and browse
+full websites to find more information. Use these tools to find accurate and up-to-date information to answer the questions.
 You MUST output your final answer in strict JSON format with exactly one field:
 1. "answer": The precise entity, date, name, or number requested.
 
@@ -18,6 +20,8 @@ CONSTRAINTS:
 - No filler words (e.g., remove "The", "A", "It is").
 - For numbers below 13, use words (e.g., "three" NOT "3").
 - If the answer is a date, prioritize the Year and month (e.g., "November 1989") unless the specific day is asked for.
+
+Be thorough and accurate, ensuring you have the correct answer.
 
 EXAMPLES:
 User: "who wrote the harry potter books"
@@ -44,15 +48,19 @@ Assistant: {
 def run_search_agent(question, max_steps=5):
     """
     Search agent loop that accepts user input and interacts with the LLM.
-    """
-    #print("Search Agent initialized. Type 'quit' to exit.")
-    
+    """    
     messages = [
         {"role": "system", "content": system_prompt},
         {"role": "user", "content": question}
     ]
     steps = 0
-    final_answer = ""
+
+    #trajectory log that stores all information on each step to put into agent_trajectories.jsonl later
+    trajectory_log = {
+        "question": question,
+        "steps": [],
+        "final_answer": None
+    }
     while steps < max_steps:
         try:
             response = client.chat.completions.create(
@@ -60,15 +68,18 @@ def run_search_agent(question, max_steps=5):
                 messages=messages,
                 tools=tools_list,
                 response_format={"type": "json_object"},
+                #timeout=10.0,
                 stream=False
             )
 
             message = response.choices[0].message
             messages.append(message)
-
+            
             if message.tool_calls:
                 steps += 1
                 print(f"Search Agent wants to use tools: {len(message.tool_calls)} call(s)")
+                if message.content:
+                    print(f"Agents reasoning: {message.content}")
                     
                 for tool_call in message.tool_calls:
                     function_name = tool_call.function.name
@@ -79,8 +90,44 @@ def run_search_agent(question, max_steps=5):
 
                     if function_name in available_tools:
                         function_to_call = available_tools[function_name]
-                        tool_response = function_to_call(**function_args)
-                        
+                        raw_results = function_to_call(**function_args)
+
+                        # need to process the raw_results differently based on which tool was called
+                        if function_name == "website_browsing":
+                            content = raw_results.get("content","") 
+                            title = raw_results.get("title","")
+                            tool_response = content[:100000]    # limit to first 10k characters to avoid overloading model
+                            # format for the trajectory, save records for this step
+                            step_record = {
+                                "step_numer": steps,
+                                "action": "browsing",
+                                "link": function_args.get("link", ""),
+                                "num_docs_requested": 1,
+                                "retrieved_documents": title}
+                            
+                            trajectory_log["steps"].append(step_record)
+
+                        elif function_name == "google_search":
+                            # convert the raw results (dict) to string readable for LLM
+                            result_text = ""
+                            num_docs_requested = len(raw_results)    # this is the num_documents for the trajectory
+                            retrieved_documents = []
+                            query = function_args.get("query", "")
+                            for item in raw_results:
+                                result_text += f"Title: {item.get('title')}\nSnippet: {item.get('snippet')}\nLink: {item.get('link')}\n---\n"
+                                retrieved_documents.append({"title": item.get('title'),"snippet": item.get('snippet')}) #to get actual dictionary format of requested documents for trajectory
+                            tool_response = result_text.strip()
+                            
+                            # format for the trajectory, save records for this step
+                            step_record = {
+                                "step_numer": steps,
+                                "action": "search",
+                                "query": query,
+                                "num_docs_requested": num_docs_requested,
+                                "retrieved_documents": retrieved_documents}
+                            
+                            trajectory_log["steps"].append(step_record)
+
                         messages.append({
                             "tool_call_id": tool_call.id,
                             "role": "tool",
@@ -103,21 +150,22 @@ def run_search_agent(question, max_steps=5):
                     return "Error: Empty response", None, messages
                 try:
                     data = json.loads(content)
-                    short_answer = data['answer']
+                    short_answer = data.get("answer","")
                     print(f"Short answer: {short_answer}")
-                    return short_answer, messages
+                    trajectory_log["final_answer"] = short_answer
+                    return short_answer, messages, trajectory_log
                 except json.JSONDecodeError:
                     # Fallback: Sometimes models (rarely) mess up even with json_object
                     print("Something went wrong with the response...")
                     print(f"Agent (Text): {content}")
-                    return content, messages
+                    return content, messages, trajectory_log
 
         except Exception as e:
             print(f"An error occurred: {e}")
             break
-    return "Error: Max steps reached without answer", messages
+    return "Error: Max steps reached without answer", messages, trajectory_log
 
-def base_agent(query):
+def run_base_agent(query):
     try:
         response = client.chat.completions.create(
             model="deepseek-chat",
@@ -146,5 +194,6 @@ def base_agent(query):
         return None
 
 if __name__ == "__main__":
-    short, messages = run_search_agent("who was the ruler of england in 1616?")
-    short, messages = run_search_agent("when was the first hunger games book published?")
+    #short, messages, traj_log = run_search_agent("who was the ruler of england in 1616?")
+    short, messages, traj_log = run_search_agent("")
+    print(traj_log)
