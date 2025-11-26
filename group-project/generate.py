@@ -15,9 +15,9 @@ def run_generation():
     print("Starting Evaluation...")
 
     with open(input_path, 'r') as f_in, \
-         open(output_path_nosearch, 'w') as f_nosearch: #\
-         #open(output_path_search, 'w') as f_search, \
-         #open(output_path_trajectories, 'w') as f_traj:
+         open(output_path_nosearch, 'w') as f_nosearch, \
+         open(output_path_search, 'w') as f_search, \
+         open(output_path_trajectories, 'w') as f_traj:
 
         count = 0
         # Process each line
@@ -30,12 +30,12 @@ def run_generation():
             print(f"\n=== Processing Question {count}, {question[:50]}...     =====")
             
             # Run both agents   
-            #short_answer, messages = run_search_agent(question)
+            short_answer, messages = run_search_agent(question)
             base_answer = base_agent(question)
 
             # Save Predictions
-            #record_search = {"id": question_id,"question": question, "answers": answers, "llm_response": short_answer}
-            #f_search.write(json.dumps(record_search) + "\n")
+            record_search = {"id": question_id,"question": question, "answers": answers, "llm_response": short_answer}
+            f_search.write(json.dumps(record_search) + "\n")
 
             record_nosearch = {"id": question_id,"question": question, "answers": answers, "llm_response": base_answer}
             f_nosearch.write(json.dumps(record_nosearch) + "\n")
@@ -45,6 +45,10 @@ def run_generation():
             #f_traj.write(json.dumps(record_traj) + "\n")
 
     print("Generation completed.")
+
+def run_math_generation():
+    input_path = "/Users/timadam/Desktop/LLM_agents_project/LLM_project/assignment4/data/aime24.jsonl"
+    output_path = "/Users/timadam/Desktop/LLM_agents_project/LLM_project/assignment4/results/aime24_predictions.jsonl"
 
 #evaluating script
 if __name__ == "__main__":

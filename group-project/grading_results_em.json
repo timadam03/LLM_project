@@ -1,6 +1,6 @@
 {
-  "exact_match": 0.42,
-  "f1_score": 0.5904794649794648,
+  "exact_match": 0.4,
+  "f1_score": 0.5610800865800865,
   "total_count": 100,
   "detailed_results": [
     {
@@ -42,8 +42,8 @@
     {
       "id": "nq_validation_3",
       "question": "when did the eagles win last super bowl?",
-      "student_answer": "2024",
-      "extracted_answer": "2024",
+      "student_answer": "2018",
+      "extracted_answer": "2018",
       "ground_truths": [
         "2017"
       ],
@@ -53,19 +53,19 @@
     {
       "id": "nq_validation_4",
       "question": "who won last year's ncaa women's basketball?",
-      "student_answer": "South Carolina",
-      "extracted_answer": "South Carolina",
+      "student_answer": "LSU Tigers",
+      "extracted_answer": "LSU Tigers",
       "ground_truths": [
         "South Carolina"
       ],
-      "exact_match": 1.0,
-      "f1_score": 1.0
+      "exact_match": 0.0,
+      "f1_score": 0.0
     },
     {
       "id": "nq_validation_5",
       "question": "when did the isle of wight become an island?",
-      "student_answer": "125,000 years ago",
-      "extracted_answer": "125,000 years ago",
+      "student_answer": "circa 7,000 years ago",
+      "extracted_answer": "circa 7,000 years ago",
       "ground_truths": [
         "During the last Ice Age"
       ],
@@ -75,8 +75,8 @@
     {
       "id": "nq_validation_6",
       "question": "love yourself by justin bieber is about who?",
-      "student_answer": "Selena Gomez",
-      "extracted_answer": "Selena Gomez",
+      "student_answer": "Justin Bieber",
+      "extracted_answer": "Justin Bieber",
       "ground_truths": [
         "Rihanna"
       ],
@@ -97,13 +97,13 @@
     {
       "id": "nq_validation_8",
       "question": "what is the hot coffee mod in san andreas?",
-      "student_answer": "minigame",
-      "extracted_answer": "minigame",
+      "student_answer": "Grand Theft Auto San Andreas",
+      "extracted_answer": "Grand Theft Auto San Andreas",
       "ground_truths": [
         "a normally inaccessible mini-game"
       ],
       "exact_match": 0.0,
-      "f1_score": 0.5
+      "f1_score": 0.0
     },
     {
       "id": "nq_validation_9",
@@ -131,19 +131,19 @@
     {
       "id": "nq_validation_11",
       "question": "who sang i ran all the way home?",
-      "student_answer": "The Impalas",
-      "extracted_answer": "The Impalas",
+      "student_answer": "Simon & Garfunkel",
+      "extracted_answer": "Simon & Garfunkel",
       "ground_truths": [
         "The Impalas"
       ],
-      "exact_match": 1.0,
-      "f1_score": 1.0
+      "exact_match": 0.0,
+      "f1_score": 0.0
     },
     {
       "id": "nq_validation_12",
       "question": "where did the last name wallace come from?",
-      "student_answer": "Scotland from Welsh Marches meaning Welshman",
-      "extracted_answer": "Scotland from Welsh Marches meaning Welshman",
+      "student_answer": "Scotland",
+      "extracted_answer": "Scotland",
       "ground_truths": [
         "a Scottish surname"
       ],
@@ -164,8 +164,8 @@
     {
       "id": "nq_validation_14",
       "question": "who does the voice of nala in the lion king?",
-      "student_answer": "Niketa Calame",
-      "extracted_answer": "Niketa Calame",
+      "student_answer": "Moira Kelly",
+      "extracted_answer": "Moira Kelly",
       "ground_truths": [
         "Niketa Calame",
         "Sally Dworsky",
@@ -178,41 +178,41 @@
     {
       "id": "nq_validation_15",
       "question": "who plays gram on the young and the restless?",
-      "student_answer": "Error: Max steps reached without answer",
-      "extracted_answer": "Error: Max steps reached without answer",
+      "student_answer": "Beth Maitland",
+      "extracted_answer": "Beth Maitland",
       "ground_truths": [
         "Max Shippee"
       ],
       "exact_match": 0.0,
-      "f1_score": 0.25
+      "f1_score": 0.0
     },
     {
       "id": "nq_validation_16",
       "question": "what is the oath that new citizens take?",
-      "student_answer": "Error: Max steps reached without answer",
-      "extracted_answer": "Error: Max steps reached without answer",
+      "student_answer": "Oath of Allegiance",
+      "extracted_answer": "Oath of Allegiance",
       "ground_truths": [
         "United States Oath of Allegiance"
       ],
       "exact_match": 0.0,
-      "f1_score": 0.0
+      "f1_score": 0.7499999999999999
     },
     {
       "id": "nq_validation_17",
       "question": "who is under the mask of darth vader?",
-      "student_answer": "David Prowse",
-      "extracted_answer": "David Prowse",
+      "student_answer": "Anakin Skywalker",
+      "extracted_answer": "Anakin Skywalker",
       "ground_truths": [
         "Anakin Skywalker"
       ],
-      "exact_match": 0.0,
-      "f1_score": 0.0
+      "exact_match": 1.0,
+      "f1_score": 1.0
     },
     {
       "id": "nq_validation_18",
       "question": "who had a baby at 100 in the bible?",
-      "student_answer": "Abraham",
-      "extracted_answer": "Abraham",
+      "student_answer": "Sarah",
+      "extracted_answer": "Sarah",
       "ground_truths": [
         "Sarah",
         "Abraham"
@@ -223,13 +223,13 @@
     {
       "id": "nq_validation_19",
       "question": "what age do you need to be to buy a bb gun?",
-      "student_answer": "18",
-      "extracted_answer": "18",
+      "student_answer": "eighteen",
+      "extracted_answer": "eighteen",
       "ground_truths": [
         "18"
       ],
-      "exact_match": 1.0,
-      "f1_score": 1.0
+      "exact_match": 0.0,
+      "f1_score": 0.0
     },
     {
       "id": "nq_validation_20",
@@ -245,14 +245,14 @@
     {
       "id": "nq_validation_21",
       "question": "where was percy jackson and the olympians filmed?",
-      "student_answer": "Vancouver, British Columbia",
-      "extracted_answer": "Vancouver, British Columbia",
+      "student_answer": "Vancouver",
+      "extracted_answer": "Vancouver",
       "ground_truths": [
         "Vancouver",
         "Mission, British Columbia"
       ],
-      "exact_match": 0.0,
-      "f1_score": 0.6666666666666666
+      "exact_match": 1.0,
+      "f1_score": 1.0
     },
     {
       "id": "nq_validation_22",
@@ -292,14 +292,14 @@
     {
       "id": "nq_validation_25",
       "question": "when was the first australian prime minister elected?",
-      "student_answer": "January 1901",
-      "extracted_answer": "January 1901",
+      "student_answer": "1901",
+      "extracted_answer": "1901",
       "ground_truths": [
         "Sir Edmund Barton",
         "1901"
       ],
-      "exact_match": 0.0,
-      "f1_score": 0.6666666666666666
+      "exact_match": 1.0,
+      "f1_score": 1.0
     },
     {
       "id": "nq_validation_26",
@@ -315,13 +315,13 @@
     {
       "id": "nq_validation_27",
       "question": "who is the girl in green day 21 guns?",
-      "student_answer": "Lisa Stelly",
-      "extracted_answer": "Lisa Stelly",
+      "student_answer": "Mike Dirnt's daughter",
+      "extracted_answer": "Mike Dirnt's daughter",
       "ground_truths": [
         "Lisa Stelly"
       ],
-      "exact_match": 1.0,
-      "f1_score": 1.0
+      "exact_match": 0.0,
+      "f1_score": 0.0
     },
     {
       "id": "nq_validation_28",
@@ -394,38 +394,38 @@
     {
       "id": "nq_validation_34",
       "question": "who developed the concept of total quality management?",
-      "student_answer": "Armand Feigenbaum",
-      "extracted_answer": "Armand Feigenbaum",
+      "student_answer": "W. Edwards Deming",
+      "extracted_answer": "W. Edwards Deming",
       "ground_truths": [
         "W. Edwards Deming"
-      ],
-      "exact_match": 0.0,
-      "f1_score": 0.0
-    },
-    {
-      "id": "nq_validation_35",
-      "question": "who wrote cant get you out of my head lyrics?",
-      "student_answer": "Cathy Dennis and Rob Davis",
-      "extracted_answer": "Cathy Dennis and Rob Davis",
-      "ground_truths": [
-        "Cathy Dennis and Rob Davis",
-        "Rob Davis",
-        "Cathy Dennis"
       ],
       "exact_match": 1.0,
       "f1_score": 1.0
     },
     {
+      "id": "nq_validation_35",
+      "question": "who wrote cant get you out of my head lyrics?",
+      "student_answer": "Kylie Minogue",
+      "extracted_answer": "Kylie Minogue",
+      "ground_truths": [
+        "Cathy Dennis and Rob Davis",
+        "Rob Davis",
+        "Cathy Dennis"
+      ],
+      "exact_match": 0.0,
+      "f1_score": 0.0
+    },
+    {
       "id": "nq_validation_36",
       "question": "where does no game no life anime end?",
-      "student_answer": "light novel volume 3",
-      "extracted_answer": "light novel volume 3",
+      "student_answer": "Volume three",
+      "extracted_answer": "Volume three",
       "ground_truths": [
         "the Elkia Federation",
         "the sixth volume"
       ],
       "exact_match": 0.0,
-      "f1_score": 0.3333333333333333
+      "f1_score": 0.5
     },
     {
       "id": "nq_validation_37",
@@ -466,14 +466,14 @@
     {
       "id": "nq_validation_40",
       "question": "what are the ranks in the us navy?",
-      "student_answer": "Seaman Recruit, Seaman Apprentice, Seaman, Petty Officer Third Class, Petty Officer Second Class, Petty Officer First Class, Chief Petty Officer, Senior Chief Petty Officer, Master Chief Petty Officer, Master Chief Petty Officer of the Navy, Warrant Officer 1, Chief Warrant Officer 2, Chief Warrant Officer 3, Chief Warrant Officer 4, Chief Warrant Officer 5, Ensign, Lieutenant Junior Grade, Lieutenant, Lieutenant Commander, Commander, Captain, Rear Admiral Lower Half, Rear Admiral, Vice Admiral, Admiral, Fleet Admiral",
-      "extracted_answer": "Seaman Recruit, Seaman Apprentice, Seaman, Petty Officer Third Class, Petty Officer Second Class, Petty Officer First Class, Chief Petty Officer, Senior Chief Petty Officer, Master Chief Petty Officer, Master Chief Petty Officer of the Navy, Warrant Officer 1, Chief Warrant Officer 2, Chief Warrant Officer 3, Chief Warrant Officer 4, Chief Warrant Officer 5, Ensign, Lieutenant Junior Grade, Lieutenant, Lieutenant Commander, Commander, Captain, Rear Admiral Lower Half, Rear Admiral, Vice Admiral, Admiral, Fleet Admiral",
+      "student_answer": "Seaman, Petty Officer, Chief Petty Officer, Senior Chief Petty Officer, Master Chief Petty Officer, Warrant Officer, Chief Warrant Officer, Ensign, Lieutenant Junior Grade, Lieutenant, Lieutenant Commander, Commander, Captain, Rear Admiral Lower Half, Rear Admiral, Vice Admiral, Admiral, Fleet Admiral",
+      "extracted_answer": "Seaman, Petty Officer, Chief Petty Officer, Senior Chief Petty Officer, Master Chief Petty Officer, Warrant Officer, Chief Warrant Officer, Ensign, Lieutenant Junior Grade, Lieutenant, Lieutenant Commander, Commander, Captain, Rear Admiral Lower Half, Rear Admiral, Vice Admiral, Admiral, Fleet Admiral",
       "ground_truths": [
         "E-8s senior chief petty officer",
         "E-9s master chief petty officer"
       ],
       "exact_match": 0.0,
-      "f1_score": 0.10256410256410256
+      "f1_score": 0.18181818181818182
     },
     {
       "id": "nq_validation_41",
@@ -500,8 +500,8 @@
     {
       "id": "nq_validation_43",
       "question": "last episode of what happens to my family?",
-      "student_answer": "March 2015",
-      "extracted_answer": "March 2015",
+      "student_answer": "September 2015",
+      "extracted_answer": "September 2015",
       "ground_truths": [
         "53"
       ],
@@ -559,14 +559,14 @@
     {
       "id": "nq_validation_48",
       "question": "location of the ten commandments in the bible?",
-      "student_answer": "Exodus 20 and Deuteronomy 5",
-      "extracted_answer": "Exodus 20 and Deuteronomy 5",
+      "student_answer": "Exodus 20",
+      "extracted_answer": "Exodus 20",
       "ground_truths": [
         "Exodus",
         "Deuteronomy"
       ],
       "exact_match": 0.0,
-      "f1_score": 0.33333333333333337
+      "f1_score": 0.6666666666666666
     },
     {
       "id": "nq_validation_49",
@@ -583,8 +583,8 @@
     {
       "id": "nq_validation_50",
       "question": "what is the meaning of veronica in english?",
-      "student_answer": "Truth",
-      "extracted_answer": "Truth",
+      "student_answer": "True image",
+      "extracted_answer": "True image",
       "ground_truths": [
         "she who brings victory"
       ],
@@ -606,13 +606,13 @@
     {
       "id": "nq_validation_52",
       "question": "who played solomon in little house on the prairie?",
-      "student_answer": "Todd Bridges",
-      "extracted_answer": "Todd Bridges",
+      "student_answer": "Stan Ivar",
+      "extracted_answer": "Stan Ivar",
       "ground_truths": [
         "Todd Bridges"
       ],
-      "exact_match": 1.0,
-      "f1_score": 1.0
+      "exact_match": 0.0,
+      "f1_score": 0.0
     },
     {
       "id": "nq_validation_53",
@@ -640,8 +640,8 @@
     {
       "id": "nq_validation_55",
       "question": "architectural elements forming rib vaults eg wells cathedral?",
-      "student_answer": "diagonal ribs, transverse ribs, tiercerons, liernes, webbing",
-      "extracted_answer": "diagonal ribs, transverse ribs, tiercerons, liernes, webbing",
+      "student_answer": "ribs",
+      "extracted_answer": "ribs",
       "ground_truths": [
         "an armature of piped masonry",
         "barrel vaults",
@@ -679,8 +679,8 @@
     {
       "id": "nq_validation_58",
       "question": "where does a roadrunner live in the desert?",
-      "student_answer": "southwestern United States, Mexico, Central America",
-      "extracted_answer": "southwestern United States, Mexico, Central America",
+      "student_answer": "Southwestern United States and Mexico",
+      "extracted_answer": "Southwestern United States and Mexico",
       "ground_truths": [
         "mountainous shrubland",
         "arid lowland"
@@ -691,8 +691,8 @@
     {
       "id": "nq_validation_59",
       "question": "who wrote it's a long long way to pasadena?",
-      "student_answer": "Harry Vanda, George Young, David Hemmings",
-      "extracted_answer": "Harry Vanda, George Young, David Hemmings",
+      "student_answer": "The Rolling Stones",
+      "extracted_answer": "The Rolling Stones",
       "ground_truths": [
         "John Young",
         "Harry Vanda",
@@ -700,7 +700,7 @@
         "George Young"
       ],
       "exact_match": 0.0,
-      "f1_score": 0.5
+      "f1_score": 0.0
     },
     {
       "id": "nq_validation_60",
@@ -716,14 +716,14 @@
     {
       "id": "nq_validation_61",
       "question": "who are nominated for president of india 2017?",
-      "student_answer": "Ram Nath Kovind and Meira Kumar",
-      "extracted_answer": "Ram Nath Kovind and Meira Kumar",
+      "student_answer": "Ram Nath Kovind",
+      "extracted_answer": "Ram Nath Kovind",
       "ground_truths": [
         "Meira Kumar",
         "Ram Nath Kovind"
       ],
-      "exact_match": 0.0,
-      "f1_score": 0.6666666666666666
+      "exact_match": 1.0,
+      "f1_score": 1.0
     },
     {
       "id": "nq_validation_62",
@@ -739,13 +739,13 @@
     {
       "id": "nq_validation_63",
       "question": "where does route 66 start on the west coast?",
-      "student_answer": "Santa Monica, California",
-      "extracted_answer": "Santa Monica, California",
+      "student_answer": "Santa Monica",
+      "extracted_answer": "Santa Monica",
       "ground_truths": [
         "in Santa Monica"
       ],
       "exact_match": 0.0,
-      "f1_score": 0.6666666666666666
+      "f1_score": 0.8
     },
     {
       "id": "nq_validation_64",
@@ -772,14 +772,14 @@
     {
       "id": "nq_validation_66",
       "question": "when did they stop cigarette advertising on television?",
-      "student_answer": "January 1971",
-      "extracted_answer": "January 1971",
+      "student_answer": "1971",
+      "extracted_answer": "1971",
       "ground_truths": [
         "January 2, 1971",
         "1970"
       ],
       "exact_match": 0.0,
-      "f1_score": 0.8
+      "f1_score": 0.5
     },
     {
       "id": "nq_validation_67",
@@ -806,30 +806,30 @@
     {
       "id": "nq_validation_69",
       "question": "the oligodynamic effect is a phenomenon that describes?",
-      "student_answer": "antimicrobial effect of metal ions on microorganisms",
-      "extracted_answer": "antimicrobial effect of metal ions on microorganisms",
+      "student_answer": "antimicrobial effect of metal ions",
+      "extracted_answer": "antimicrobial effect of metal ions",
       "ground_truths": [
         "a biocidal effect of metals"
       ],
       "exact_match": 0.0,
-      "f1_score": 0.36363636363636365
+      "f1_score": 0.4444444444444445
     },
     {
       "id": "nq_validation_70",
       "question": "where does the white witch live in narnia?",
-      "student_answer": "Jadis' Castle",
-      "extracted_answer": "Jadis' Castle",
+      "student_answer": "Charn",
+      "extracted_answer": "Charn",
       "ground_truths": [
         "her castle"
       ],
       "exact_match": 0.0,
-      "f1_score": 0.5
+      "f1_score": 0.0
     },
     {
       "id": "nq_validation_71",
       "question": "how many games in a row have the uconn women's basketball team won?",
-      "student_answer": "16",
-      "extracted_answer": "16",
+      "student_answer": "twenty",
+      "extracted_answer": "twenty",
       "ground_truths": [
         "111 straight wins",
         "111",
@@ -900,13 +900,13 @@
     {
       "id": "nq_validation_77",
       "question": "when did marathon change its name to snickers?",
-      "student_answer": "1990",
-      "extracted_answer": "1990",
+      "student_answer": "July 1990",
+      "extracted_answer": "July 1990",
       "ground_truths": [
         "19 July 1990"
       ],
       "exact_match": 0.0,
-      "f1_score": 0.5
+      "f1_score": 0.8
     },
     {
       "id": "nq_validation_78",
@@ -922,13 +922,13 @@
     {
       "id": "nq_validation_79",
       "question": "who ordered the forbidden city to be built?",
-      "student_answer": "Zhu Di",
-      "extracted_answer": "Zhu Di",
+      "student_answer": "Yongle Emperor",
+      "extracted_answer": "Yongle Emperor",
       "ground_truths": [
         "Zhu Di"
       ],
-      "exact_match": 1.0,
-      "f1_score": 1.0
+      "exact_match": 0.0,
+      "f1_score": 0.0
     },
     {
       "id": "nq_validation_80",
@@ -944,13 +944,13 @@
     {
       "id": "nq_validation_81",
       "question": "who has the power to approve or veto legislation constitution?",
-      "student_answer": "President of the United States",
-      "extracted_answer": "President of the United States",
+      "student_answer": "President",
+      "extracted_answer": "President",
       "ground_truths": [
         "the President"
       ],
-      "exact_match": 0.0,
-      "f1_score": 0.4
+      "exact_match": 1.0,
+      "f1_score": 1.0
     },
     {
       "id": "nq_validation_82",
@@ -978,8 +978,8 @@
     {
       "id": "nq_validation_84",
       "question": "what was the initial effect of the transition from command to market economies in eastern europe?",
-      "student_answer": "                                                                                                            ",
-      "extracted_answer": "",
+      "student_answer": "Economic decline",
+      "extracted_answer": "Economic decline",
       "ground_truths": [
         "Inequality of opportunity"
       ],
@@ -989,8 +989,8 @@
     {
       "id": "nq_validation_85",
       "question": "when did toyota start making cars in the us?",
-      "student_answer": "1988",
-      "extracted_answer": "1988",
+      "student_answer": "1986",
+      "extracted_answer": "1986",
       "ground_truths": [
         "by the early 1980s",
         "1984"
@@ -1001,14 +1001,14 @@
     {
       "id": "nq_validation_86",
       "question": "how many pieces in a terry's chocolate orange?",
-      "student_answer": "20",
-      "extracted_answer": "20",
+      "student_answer": "twenty",
+      "extracted_answer": "twenty",
       "ground_truths": [
         "six",
         "20"
       ],
-      "exact_match": 1.0,
-      "f1_score": 1.0
+      "exact_match": 0.0,
+      "f1_score": 0.0
     },
     {
       "id": "nq_validation_87",
@@ -1024,15 +1024,15 @@
     {
       "id": "nq_validation_88",
       "question": "when did the royal proclamation of 1763 end?",
-      "student_answer": "1783",
-      "extracted_answer": "1783",
+      "student_answer": "1763",
+      "extracted_answer": "1763",
       "ground_truths": [
         "the American Revolutionary War",
         "with the American Revolutionary War",
         "1783"
       ],
-      "exact_match": 1.0,
-      "f1_score": 1.0
+      "exact_match": 0.0,
+      "f1_score": 0.0
     },
     {
       "id": "nq_validation_89",
@@ -1050,37 +1050,37 @@
     {
       "id": "nq_validation_90",
       "question": "jonny cash one piece at a time car?",
-      "student_answer": "1976",
-      "extracted_answer": "1976",
+      "student_answer": "Cadillac",
+      "extracted_answer": "Cadillac",
       "ground_truths": [
         "Cadillac"
       ],
-      "exact_match": 0.0,
-      "f1_score": 0.0
+      "exact_match": 1.0,
+      "f1_score": 1.0
     },
     {
       "id": "nq_validation_91",
       "question": "what is the minimum wage in france per hour?",
-      "student_answer": "€11.88",
-      "extracted_answer": "€11.88",
+      "student_answer": "€11.65 per hour",
+      "extracted_answer": "€11.65 per hour",
       "ground_truths": [
         "11.16",
         "€9.88 per hour."
       ],
       "exact_match": 0.0,
-      "f1_score": 0.0
+      "f1_score": 0.6666666666666666
     },
     {
       "id": "nq_validation_92",
       "question": "describe the three phases of the normal blood clotting process?",
-      "student_answer": "                                                                                           ",
-      "extracted_answer": "",
+      "student_answer": "Vasoconstriction, platelet plug formation, coagulation",
+      "extracted_answer": "Vasoconstriction, platelet plug formation, coagulation",
       "ground_truths": [
         "blood coagulation",
         "vasoconstriction,"
       ],
       "exact_match": 0.0,
-      "f1_score": 0.0
+      "f1_score": 0.33333333333333337
     },
     {
       "id": "nq_validation_93",
@@ -1141,8 +1141,8 @@
     {
       "id": "nq_validation_98",
       "question": "types of skiing in the winter olympics 2018?",
-      "student_answer": "Alpine skiing, Cross-country skiing, Freestyle skiing, Nordic combined, Ski jumping",
-      "extracted_answer": "Alpine skiing, Cross-country skiing, Freestyle skiing, Nordic combined, Ski jumping",
+      "student_answer": "Alpine, Nordic, Freestyle, Snowboard, Biathlon, Ski Jumping, Cross-Country",
+      "extracted_answer": "Alpine, Nordic, Freestyle, Snowboard, Biathlon, Ski Jumping, Cross-Country",
       "ground_truths": [
         "Slalom",
         "Downhill",
@@ -1156,13 +1156,13 @@
     {
       "id": "nq_validation_99",
       "question": "who plays noah newman on the young and the restless?",
-      "student_answer": "Lucas Adams",
-      "extracted_answer": "Lucas Adams",
+      "student_answer": "Robert Adamson",
+      "extracted_answer": "Robert Adamson",
       "ground_truths": [
         "Robert Gillespie Adamson IV"
       ],
       "exact_match": 0.0,
-      "f1_score": 0.0
+      "f1_score": 0.6666666666666666
     }
   ]
 }

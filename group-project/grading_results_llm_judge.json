@@ -1,6 +1,6 @@
 {
-  "accuracy": 0.72,
-  "correct_count": 72,
+  "accuracy": 0.7,
+  "correct_count": 70,
   "total_count": 100,
   "model_used": "deepseek-chat",
   "detailed_results": [
@@ -65,13 +65,13 @@
     {
       "id": "nq_validation_5",
       "question": "when did the isle of wight become an island?",
-      "student_answer": "7000 BCE",
+      "student_answer": "circa 7,000 years ago",
       "ground_truths": [
         "During the last Ice Age"
       ],
       "correct": false,
-      "explanation": "The student answer \"7000 BCE\" is a specific date that does not align with the more general but scientifically accurate ground truth \"During the last Ice Age.\" The separation of the Isle of Wight from mainland Britain was a process that occurred over millennia as sea levels rose after the last Ice Age, culminating around 7,000 years ago (or 5000 BCE), not in 7000 BCE. The student's date is factually inaccurate.",
-      "raw_judge_response": "INCORRECT: The student answer \"7000 BCE\" is a specific date that does not align with the more general but scientifically accurate ground truth \"During the last Ice Age.\" The separation of the Isle of Wight from mainland Britain was a process that occurred over millennia as sea levels rose after the last Ice Age, culminating around 7,000 years ago (or 5000 BCE), not in 7000 BCE. The student's date is factually inaccurate."
+      "explanation": "The student answer \"circa 7,000 years ago\" is a specific date that contradicts the more general \"During the last Ice Age,\" which ended around 11,700 years ago. The two timeframes are not semantically equivalent.",
+      "raw_judge_response": "INCORRECT: The student answer \"circa 7,000 years ago\" is a specific date that contradicts the more general \"During the last Ice Age,\" which ended around 11,700 years ago. The two timeframes are not semantically equivalent."
     },
     {
       "id": "nq_validation_6",
@@ -218,8 +218,8 @@
         "Abraham"
       ],
       "correct": true,
-      "explanation": "The student answer \"Sarah\" matches one of the ground truth answers and contains the same factual information.",
-      "raw_judge_response": "CORRECT: The student answer \"Sarah\" matches one of the ground truth answers and contains the same factual information."
+      "explanation": "The student's answer \"Sarah\" matches one of the ground truth answers and contains the same factual information.",
+      "raw_judge_response": "CORRECT: The student's answer \"Sarah\" matches one of the ground truth answers and contains the same factual information."
     },
     {
       "id": "nq_validation_19",
@@ -235,25 +235,25 @@
     {
       "id": "nq_validation_20",
       "question": "ethiopia flight 961 crashes in to the sea?",
-      "student_answer": "1996",
+      "student_answer": "November 1996",
       "ground_truths": [
         "23 November 1996"
       ],
       "correct": true,
-      "explanation": "The student answer \"1996\" is a correct subset of the more specific ground truth date \"23 November 1996\". The year is the key factual information, and minor omissions of the day and month are acceptable.",
-      "raw_judge_response": "CORRECT: The student answer \"1996\" is a correct subset of the more specific ground truth date \"23 November 1996\". The year is the key factual information, and minor omissions of the day and month are acceptable."
+      "explanation": "The student's answer \"November 1996\" is semantically equivalent to the ground truth \"23 November 1996\". The specific day is a minor detail, and the core information of the month and year is correct and matches the event.",
+      "raw_judge_response": "CORRECT: The student's answer \"November 1996\" is semantically equivalent to the ground truth \"23 November 1996\". The specific day is a minor detail, and the core information of the month and year is correct and matches the event."
     },
     {
       "id": "nq_validation_21",
       "question": "where was percy jackson and the olympians filmed?",
-      "student_answer": "Vancouver, Canada",
+      "student_answer": "Vancouver",
       "ground_truths": [
         "Vancouver",
         "Mission, British Columbia"
       ],
       "correct": true,
-      "explanation": "The student's answer \"Vancouver, Canada\" contains the same factual information as the ground truth answer \"Vancouver\". Specifying the country is a minor, acceptable addition that does not change the core fact.",
-      "raw_judge_response": "CORRECT: The student's answer \"Vancouver, Canada\" contains the same factual information as the ground truth answer \"Vancouver\". Specifying the country is a minor, acceptable addition that does not change the core fact."
+      "explanation": "The student's answer \"Vancouver\" matches one of the provided ground truth answers exactly.",
+      "raw_judge_response": "CORRECT: The student's answer \"Vancouver\" matches one of the provided ground truth answers exactly."
     },
     {
       "id": "nq_validation_22",
@@ -276,8 +276,8 @@
         "291"
       ],
       "correct": true,
-      "explanation": "The student's answer \"291\" exactly matches one of the acceptable ground truth answers.",
-      "raw_judge_response": "CORRECT: The student's answer \"291\" exactly matches one of the acceptable ground truth answers."
+      "explanation": "The student answer \"291\" exactly matches one of the acceptable ground truth answers (\"291\").",
+      "raw_judge_response": "CORRECT: The student answer \"291\" exactly matches one of the acceptable ground truth answers (\"291\")."
     },
     {
       "id": "nq_validation_24",
@@ -293,14 +293,14 @@
     {
       "id": "nq_validation_25",
       "question": "when was the first australian prime minister elected?",
-      "student_answer": "January 1901",
+      "student_answer": "1901",
       "ground_truths": [
         "Sir Edmund Barton",
         "1901"
       ],
       "correct": true,
-      "explanation": "The student's answer \"January 1901\" provides the correct year (1901) which matches the ground truth. While it adds the specific month, this does not contradict the factual information that the event occurred in 1901.",
-      "raw_judge_response": "CORRECT: The student's answer \"January 1901\" provides the correct year (1901) which matches the ground truth. While it adds the specific month, this does not contradict the factual information that the event occurred in 1901."
+      "explanation": "The student's answer \"1901\" matches one of the provided ground truth answers exactly.",
+      "raw_judge_response": "CORRECT: The student's answer \"1901\" matches one of the provided ground truth answers exactly."
     },
     {
       "id": "nq_validation_26",
@@ -316,13 +316,13 @@
     {
       "id": "nq_validation_27",
       "question": "who is the girl in green day 21 guns?",
-      "student_answer": "Miranda Cosgrove",
+      "student_answer": "Mike Dirnt's daughter",
       "ground_truths": [
         "Lisa Stelly"
       ],
       "correct": false,
-      "explanation": "The student answer \"Miranda Cosgrove\" is factually wrong. The girl in the \"21 Guns\" music video is actress Lisa Stelly.",
-      "raw_judge_response": "INCORRECT: The student answer \"Miranda Cosgrove\" is factually wrong. The girl in the \"21 Guns\" music video is actress Lisa Stelly."
+      "explanation": "The girl in the \"21 Guns\" music video is actress Lisa Stelly, not Mike Dirnt's daughter. The student's answer contains incorrect factual information.",
+      "raw_judge_response": "INCORRECT: The girl in the \"21 Guns\" music video is actress Lisa Stelly, not Mike Dirnt's daughter. The student's answer contains incorrect factual information."
     },
     {
       "id": "nq_validation_28",
@@ -378,8 +378,8 @@
         "David Gahan"
       ],
       "correct": true,
-      "explanation": "\"Dave Gahan\" is a common, well-known nickname and shortened form of the full name \"David Gahan.\" They refer to the same person and contain the same factual information.",
-      "raw_judge_response": "CORRECT: \"Dave Gahan\" is a common, well-known nickname and shortened form of the full name \"David Gahan.\" They refer to the same person and contain the same factual information."
+      "explanation": "\"Dave Gahan\" is a common and accepted short form for the full name \"David Gahan,\" referring to the same person. The information is factually identical.",
+      "raw_judge_response": "CORRECT: \"Dave Gahan\" is a common and accepted short form for the full name \"David Gahan,\" referring to the same person. The information is factually identical."
     },
     {
       "id": "nq_validation_33",
@@ -400,8 +400,8 @@
         "W. Edwards Deming"
       ],
       "correct": true,
-      "explanation": "The student answer \"W. Edwards Deming\" exactly matches the ground truth answer.",
-      "raw_judge_response": "CORRECT: The student answer \"W. Edwards Deming\" exactly matches the ground truth answer."
+      "explanation": "The student answer \"W. Edwards Deming\" is an exact match for the ground truth answer \"W. Edwards Deming\".",
+      "raw_judge_response": "CORRECT: The student answer \"W. Edwards Deming\" is an exact match for the ground truth answer \"W. Edwards Deming\"."
     },
     {
       "id": "nq_validation_35",
@@ -413,8 +413,8 @@
         "Cathy Dennis"
       ],
       "correct": false,
-      "explanation": "The student answer \"Kylie Minogue\" is factually wrong. The ground truth answers identify the songwriters as Cathy Dennis and Rob Davis. Kylie Minogue performed the song but did not write it.",
-      "raw_judge_response": "INCORRECT: The student answer \"Kylie Minogue\" is factually wrong. The ground truth answers identify the songwriters as Cathy Dennis and Rob Davis. Kylie Minogue performed the song but did not write it."
+      "explanation": "The student answer \"Kylie Minogue\" is factually wrong. The ground truth answers identify the songwriters as Cathy Dennis and Rob Davis. Kylie Minogue was the performer of the song, not the writer of the lyrics.",
+      "raw_judge_response": "INCORRECT: The student answer \"Kylie Minogue\" is factually wrong. The ground truth answers identify the songwriters as Cathy Dennis and Rob Davis. Kylie Minogue was the performer of the song, not the writer of the lyrics."
     },
     {
       "id": "nq_validation_36",
@@ -461,20 +461,20 @@
         "judges"
       ],
       "correct": true,
-      "explanation": "The student's answer \"judges\" is an exact match to the ground truth answer \"judges\" and contains the same factual information.",
-      "raw_judge_response": "CORRECT: The student's answer \"judges\" is an exact match to the ground truth answer \"judges\" and contains the same factual information."
+      "explanation": "The student's answer \"judges\" is an exact match for the ground truth answer \"judges\" and contains the same factual information.",
+      "raw_judge_response": "CORRECT: The student's answer \"judges\" is an exact match for the ground truth answer \"judges\" and contains the same factual information."
     },
     {
       "id": "nq_validation_40",
       "question": "what are the ranks in the us navy?",
-      "student_answer": "Seaman Recruit, Seaman Apprentice, Seaman, Petty Officer Third Class, Petty Officer Second Class, Petty Officer First Class, Chief Petty Officer, Senior Chief Petty Officer, Master Chief Petty Officer, Fleet/Force Master Chief Petty Officer, Master Chief Petty Officer of the Navy, Warrant Officer 1, Chief Warrant Officer 2, Chief Warrant Officer 3, Chief Warrant Officer 4, Chief Warrant Officer 5, Ensign, Lieutenant Junior Grade, Lieutenant, Lieutenant Commander, Commander, Captain, Rear Admiral Lower Half, Rear Admiral, Vice Admiral, Admiral, Fleet Admiral",
+      "student_answer": "Seaman, Petty Officer, Chief Petty Officer, Senior Chief Petty Officer, Master Chief Petty Officer, Warrant Officer, Chief Warrant Officer, Ensign, Lieutenant Junior Grade, Lieutenant, Lieutenant Commander, Commander, Captain, Rear Admiral Lower Half, Rear Admiral, Vice Admiral, Admiral, Fleet Admiral",
       "ground_truths": [
         "E-8s senior chief petty officer",
         "E-9s master chief petty officer"
       ],
       "correct": false,
-      "explanation": "The student's answer is a comprehensive list of all US Navy ranks, while the ground truth answers are specific examples of two individual ranks (E-8 and E-9). The student's answer does not specifically mention or highlight the ranks \"E-8s senior chief petty officer\" or \"E-9s master chief petty officer\" as the ground truth requires.",
-      "raw_judge_response": "INCORRECT: The student's answer is a comprehensive list of all US Navy ranks, while the ground truth answers are specific examples of two individual ranks (E-8 and E-9). The student's answer does not specifically mention or highlight the ranks \"E-8s senior chief petty officer\" or \"E-9s master chief petty officer\" as the ground truth requires."
+      "explanation": "The student's answer provides a comprehensive list of US Navy ranks, but the ground truth answers are specific examples of two individual ranks (E-8 and E-9). The student's answer does not contain the specific factual information \"E-8s\" or \"E-9s\" found in the ground truth.",
+      "raw_judge_response": "INCORRECT: The student's answer provides a comprehensive list of US Navy ranks, but the ground truth answers are specific examples of two individual ranks (E-8 and E-9). The student's answer does not contain the specific factual information \"E-8s\" or \"E-9s\" found in the ground truth."
     },
     {
       "id": "nq_validation_41",
@@ -501,13 +501,13 @@
     {
       "id": "nq_validation_43",
       "question": "last episode of what happens to my family?",
-      "student_answer": "January 2015",
+      "student_answer": "September 2015",
       "ground_truths": [
         "53"
       ],
       "correct": false,
-      "explanation": "The ground truth answer \"53\" refers to the episode number of the final episode. The student's answer \"January 2015\" is a date, which is different factual information and does not match the requested data.",
-      "raw_judge_response": "INCORRECT: The ground truth answer \"53\" refers to the episode number of the final episode. The student's answer \"January 2015\" is a date, which is different factual information and does not match the requested data."
+      "explanation": "The ground truth answer \"53\" refers to the episode number of the final episode. The student's answer \"September 2015\" is a date, which is different factual information and does not match the requested episode number.",
+      "raw_judge_response": "INCORRECT: The ground truth answer \"53\" refers to the episode number of the final episode. The student's answer \"September 2015\" is a date, which is different factual information and does not match the requested episode number."
     },
     {
       "id": "nq_validation_44",
@@ -566,8 +566,8 @@
         "Deuteronomy"
       ],
       "correct": true,
-      "explanation": "The student's answer \"Exodus 20\" is a specific chapter within the book of \"Exodus\", which is one of the valid ground truth answers. It provides the same core factual information.",
-      "raw_judge_response": "CORRECT: The student's answer \"Exodus 20\" is a specific chapter within the book of \"Exodus\", which is one of the valid ground truth answers. It provides the same core factual information."
+      "explanation": "The student's answer \"Exodus 20\" is a specific chapter within the book of \"Exodus\", which is one of the ground truth answers. It contains the same core factual information.",
+      "raw_judge_response": "CORRECT: The student's answer \"Exodus 20\" is a specific chapter within the book of \"Exodus\", which is one of the ground truth answers. It contains the same core factual information."
     },
     {
       "id": "nq_validation_49",
@@ -584,13 +584,13 @@
     {
       "id": "nq_validation_50",
       "question": "what is the meaning of veronica in english?",
-      "student_answer": "true image",
+      "student_answer": "True image",
       "ground_truths": [
         "she who brings victory"
       ],
       "correct": false,
-      "explanation": "The ground truth answer is \"she who brings victory,\" while the student answered \"true image,\" which is a different and incorrect meaning.",
-      "raw_judge_response": "INCORRECT: The ground truth answer is \"she who brings victory,\" while the student answered \"true image,\" which is a different and incorrect meaning."
+      "explanation": "The ground truth answer is \"she who brings victory,\" while the student answered \"True image,\" which is a different and incorrect meaning.",
+      "raw_judge_response": "INCORRECT: The ground truth answer is \"she who brings victory,\" while the student answered \"True image,\" which is a different and incorrect meaning."
     },
     {
       "id": "nq_validation_51",
@@ -612,8 +612,8 @@
         "Todd Bridges"
       ],
       "correct": false,
-      "explanation": "The student answer \"Stan Ivar\" is factually wrong. The actor who played Solomon was Todd Bridges.",
-      "raw_judge_response": "INCORRECT: The student answer \"Stan Ivar\" is factually wrong. The actor who played Solomon was Todd Bridges."
+      "explanation": "The ground truth answer is Todd Bridges, while the student answered Stan Ivar. Stan Ivar is a different actor who played a different character (John Edwards) on the show.",
+      "raw_judge_response": "INCORRECT: The ground truth answer is Todd Bridges, while the student answered Stan Ivar. Stan Ivar is a different actor who played a different character (John Edwards) on the show."
     },
     {
       "id": "nq_validation_53",
@@ -663,8 +663,8 @@
         "Mickey Rooney"
       ],
       "correct": false,
-      "explanation": "The student answer \"The Beatles\" is factually wrong. The song \"Good Morning Good Morning\" was indeed performed by The Beatles, but the ground truth answers refer to performers of a different song with a similar title, likely from the musical \"Singin' in the Rain.\"",
-      "raw_judge_response": "INCORRECT: The student answer \"The Beatles\" is factually wrong. The song \"Good Morning Good Morning\" was indeed performed by The Beatles, but the ground truth answers refer to performers of a different song with a similar title, likely from the musical \"Singin' in the Rain.\""
+      "explanation": "The student answer \"The Beatles\" is factually wrong. The song \"Good Morning Good Morning\" was indeed performed by The Beatles, but the ground truth answers refer to performers of a different song with a similar title, likely from the musical \"Singin' in the Rain\".",
+      "raw_judge_response": "INCORRECT: The student answer \"The Beatles\" is factually wrong. The song \"Good Morning Good Morning\" was indeed performed by The Beatles, but the ground truth answers refer to performers of a different song with a similar title, likely from the musical \"Singin' in the Rain\"."
     },
     {
       "id": "nq_validation_57",
@@ -692,7 +692,7 @@
     {
       "id": "nq_validation_59",
       "question": "who wrote it's a long long way to pasadena?",
-      "student_answer": "The Mills Brothers",
+      "student_answer": "The Rolling Stones",
       "ground_truths": [
         "John Young",
         "Harry Vanda",
@@ -700,8 +700,8 @@
         "George Young"
       ],
       "correct": false,
-      "explanation": "The student answer \"The Mills Brothers\" is a different musical group and does not match any of the provided ground truth answers, which are the song's writers (John Young, Harry Vanda, David Hemmings, George Young).",
-      "raw_judge_response": "INCORRECT: The student answer \"The Mills Brothers\" is a different musical group and does not match any of the provided ground truth answers, which are the song's writers (John Young, Harry Vanda, David Hemmings, George Young)."
+      "explanation": "The student answer \"The Rolling Stones\" is factually wrong. The song \"It's a Long Long Way to Pasadena\" was written by John Young, Harry Vanda, David Hemmings, and George Young, not by the band The Rolling Stones.",
+      "raw_judge_response": "INCORRECT: The student answer \"The Rolling Stones\" is factually wrong. The song \"It's a Long Long Way to Pasadena\" was written by John Young, Harry Vanda, David Hemmings, and George Young, not by the band The Rolling Stones."
     },
     {
       "id": "nq_validation_60",
@@ -796,13 +796,13 @@
     {
       "id": "nq_validation_68",
       "question": "points on a sphere or angles in a circle are measured in units called?",
-      "student_answer": "radians",
+      "student_answer": "degrees",
       "ground_truths": [
         "radians"
       ],
-      "correct": true,
-      "explanation": "The student's answer \"radians\" exactly matches the ground truth answer.",
-      "raw_judge_response": "CORRECT: The student's answer \"radians\" exactly matches the ground truth answer."
+      "correct": false,
+      "explanation": "The ground truth answer is \"radians,\" which is the standard unit for measuring angles in a circle in mathematics. \"Degrees\" is a different, though also common, unit for measuring angles.",
+      "raw_judge_response": "INCORRECT: The ground truth answer is \"radians,\" which is the standard unit for measuring angles in a circle in mathematics. \"Degrees\" is a different, though also common, unit for measuring angles."
     },
     {
       "id": "nq_validation_69",
@@ -829,15 +829,15 @@
     {
       "id": "nq_validation_71",
       "question": "how many games in a row have the uconn women's basketball team won?",
-      "student_answer": "one hundred and eleven",
+      "student_answer": "twenty",
       "ground_truths": [
         "111 straight wins",
         "111",
         "90"
       ],
-      "correct": true,
-      "explanation": "The student answer \"one hundred and eleven\" is semantically equivalent to the ground truth answer \"111\".",
-      "raw_judge_response": "CORRECT: The student answer \"one hundred and eleven\" is semantically equivalent to the ground truth answer \"111\"."
+      "correct": false,
+      "explanation": "The student answer \"twenty\" does not match any of the ground truth answers (\"111 straight wins\", \"111\", or \"90\"). It contains different factual information.",
+      "raw_judge_response": "INCORRECT: The student answer \"twenty\" does not match any of the ground truth answers (\"111 straight wins\", \"111\", or \"90\"). It contains different factual information."
     },
     {
       "id": "nq_validation_72",
@@ -901,13 +901,13 @@
     {
       "id": "nq_validation_77",
       "question": "when did marathon change its name to snickers?",
-      "student_answer": "1990",
+      "student_answer": "July 1990",
       "ground_truths": [
         "19 July 1990"
       ],
       "correct": true,
-      "explanation": "The student answer \"1990\" contains the same core factual information (the year) as the ground truth \"19 July 1990\". The omission of the specific day and month is a minor formatting difference and does not change the fundamental correctness of the year.",
-      "raw_judge_response": "CORRECT: The student answer \"1990\" contains the same core factual information (the year) as the ground truth \"19 July 1990\". The omission of the specific day and month is a minor formatting difference and does not change the fundamental correctness of the year."
+      "explanation": "The student answer \"July 1990\" is semantically equivalent to the ground truth \"19 July 1990\" as it correctly identifies the same month and year. The omission of the specific day is a minor detail and does not change the core factual information.",
+      "raw_judge_response": "CORRECT: The student answer \"July 1990\" is semantically equivalent to the ground truth \"19 July 1990\" as it correctly identifies the same month and year. The omission of the specific day is a minor detail and does not change the core factual information."
     },
     {
       "id": "nq_validation_78",
@@ -934,13 +934,13 @@
     {
       "id": "nq_validation_80",
       "question": "who sang let me tell you about the birds and the bees?",
-      "student_answer": "The Jewel Akens",
+      "student_answer": "Jewel Akens",
       "ground_truths": [
         "Jewel Akens"
       ],
       "correct": true,
-      "explanation": "The student answer \"The Jewel Akens\" is a minor formatting variation of the ground truth \"Jewel Akens\" and contains the same core factual information.",
-      "raw_judge_response": "CORRECT: The student answer \"The Jewel Akens\" is a minor formatting variation of the ground truth \"Jewel Akens\" and contains the same core factual information."
+      "explanation": "The student answer \"Jewel Akens\" exactly matches the ground truth answer.",
+      "raw_judge_response": "CORRECT: The student answer \"Jewel Akens\" exactly matches the ground truth answer."
     },
     {
       "id": "nq_validation_81",
@@ -1008,8 +1008,8 @@
         "20"
       ],
       "correct": true,
-      "explanation": "The student answer \"twenty\" matches the ground truth answer \"20\" semantically, as both represent the same number.",
-      "raw_judge_response": "CORRECT: The student answer \"twenty\" matches the ground truth answer \"20\" semantically, as both represent the same number."
+      "explanation": "The student answer \"twenty\" matches the ground truth answer \"20\" semantically.",
+      "raw_judge_response": "CORRECT: The student answer \"twenty\" matches the ground truth answer \"20\" semantically."
     },
     {
       "id": "nq_validation_87",
@@ -1032,8 +1032,8 @@
         "1783"
       ],
       "correct": false,
-      "explanation": "The Royal Proclamation of 1763 was issued in 1763; it did not end in that same year. It ended with the American Revolutionary War, which concluded in 1783.",
-      "raw_judge_response": "INCORRECT: The Royal Proclamation of 1763 was issued in 1763; it did not end in that same year. It ended with the American Revolutionary War, which concluded in 1783."
+      "explanation": "The Royal Proclamation of 1763 was issued in 1763; it did not end in that same year. It ended with the American Revolutionary War, which concluded in 1783. The student's answer provides the year it was issued, not the year it ended.",
+      "raw_judge_response": "INCORRECT: The Royal Proclamation of 1763 was issued in 1763; it did not end in that same year. It ended with the American Revolutionary War, which concluded in 1783. The student's answer provides the year it was issued, not the year it ended."
     },
     {
       "id": "nq_validation_89",
@@ -1080,8 +1080,8 @@
         "vasoconstriction,"
       ],
       "correct": true,
-      "explanation": "The student's answer lists \"Vasoconstriction, platelet plug formation, coagulation,\" which includes the two key phases mentioned in the ground truth (\"vasoconstriction\" and \"coagulation\"). The addition of \"platelet plug formation\" is a correct and more detailed expansion of the process, not a contradiction.",
-      "raw_judge_response": "CORRECT: The student's answer lists \"Vasoconstriction, platelet plug formation, coagulation,\" which includes the two key phases mentioned in the ground truth (\"vasoconstriction\" and \"coagulation\"). The addition of \"platelet plug formation\" is a correct and more detailed expansion of the process, not a contradiction."
+      "explanation": "The student's answer lists \"Vasoconstriction, platelet plug formation, coagulation,\" which includes and correctly expands upon the two required phases mentioned in the ground truth (\"vasoconstriction\" and \"blood coagulation\"). The addition of \"platelet plug formation\" is a standard, correct part of the hemostasis process and does not contradict the ground truth.",
+      "raw_judge_response": "CORRECT: The student's answer lists \"Vasoconstriction, platelet plug formation, coagulation,\" which includes and correctly expands upon the two required phases mentioned in the ground truth (\"vasoconstriction\" and \"blood coagulation\"). The addition of \"platelet plug formation\" is a standard, correct part of the hemostasis process and does not contradict the ground truth."
     },
     {
       "id": "nq_validation_93",
@@ -1136,13 +1136,13 @@
         "the Archies"
       ],
       "correct": true,
-      "explanation": "The student's answer \"The Archies\" matches the ground truth answer \"the Archies\" exactly, with only a minor capitalization difference that is acceptable.",
-      "raw_judge_response": "CORRECT: The student's answer \"The Archies\" matches the ground truth answer \"the Archies\" exactly, with only a minor capitalization difference that is acceptable."
+      "explanation": "The student's answer \"The Archies\" matches the ground truth answer \"the Archies\" exactly, with only a minor capitalization difference which is acceptable.",
+      "raw_judge_response": "CORRECT: The student's answer \"The Archies\" matches the ground truth answer \"the Archies\" exactly, with only a minor capitalization difference which is acceptable."
     },
     {
       "id": "nq_validation_98",
       "question": "types of skiing in the winter olympics 2018?",
-      "student_answer": "Alpine, Cross-Country, Ski Jumping, Nordic Combined, Freestyle, Snowboarding, Biathlon",
+      "student_answer": "Alpine, Nordic, Freestyle, Snowboard, Biathlon, Ski Jumping, Cross-Country",
       "ground_truths": [
         "Slalom",
         "Downhill",
@@ -1151,8 +1151,8 @@
         "Slalom – (SC)"
       ],
       "correct": false,
-      "explanation": "The student answer lists broad categories of skiing sports, while the ground truth answer specifically lists the disciplines within Alpine skiing (Slalom, Downhill, Super-G, Giant slalom). The student's answer does not contain the specific factual information provided in the ground truth.",
-      "raw_judge_response": "INCORRECT: The student answer lists broad categories of skiing sports, while the ground truth answer specifically lists the disciplines within Alpine skiing (Slalom, Downhill, Super-G, Giant slalom). The student's answer does not contain the specific factual information provided in the ground truth."
+      "explanation": "The student's answer lists broad categories of skiing sports (Alpine, Nordic, Freestyle) and specific events (Biathlon, Ski Jumping, Cross-Country). However, the ground truth requires specific Alpine skiing *disciplines* from the 2018 Olympics (Slalom, Downhill, etc.). The student's answer does not contain any of these specific disciplines.",
+      "raw_judge_response": "INCORRECT: The student's answer lists broad categories of skiing sports (Alpine, Nordic, Freestyle) and specific events (Biathlon, Ski Jumping, Cross-Country). However, the ground truth requires specific Alpine skiing *disciplines* from the 2018 Olympics (Slalom, Downhill, etc.). The student's answer does not contain any of these specific disciplines."
     },
     {
       "id": "nq_validation_99",
@@ -1162,8 +1162,8 @@
         "Robert Gillespie Adamson IV"
       ],
       "correct": true,
-      "explanation": "\"Robert Adamson\" is a common and acceptable shortened form of the actor's full name \"Robert Gillespie Adamson IV\" and refers to the same person.",
-      "raw_judge_response": "CORRECT: \"Robert Adamson\" is a common and acceptable shortened form of the actor's full name \"Robert Gillespie Adamson IV\" and refers to the same person."
+      "explanation": "The student answer \"Robert Adamson\" is a common and acceptable shortened form of the full name \"Robert Gillespie Adamson IV\" and refers to the same actor.",
+      "raw_judge_response": "CORRECT: The student answer \"Robert Adamson\" is a common and acceptable shortened form of the full name \"Robert Gillespie Adamson IV\" and refers to the same actor."
     }
   ]
 }

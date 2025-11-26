@@ -12,3 +12,20 @@ tools_list = [{
         }
     }
 }]
+math_tools = [{
+    "type": "function",
+    "function": {
+        "name": "execute_python_code",
+        "description": "Execute Python code to perform calculations and verify solutions",
+        "parameters": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "type": "string",
+                    "description": "Python code to execute"
+                }
+            },
+            "required": ["code"]
+        }
+    }
+}]
