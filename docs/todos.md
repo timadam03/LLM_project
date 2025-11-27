@@ -19,25 +19,27 @@ This file mirrors the structure of `group-project/README.md` so we can track com
   - Baseline (latest run): **EM 36%** (worse than previous 39%).  
   - _Analysis:_ While I cannot run the LLM judge on the new baseline (missing API key), the drop in baseline EM score suggests the baseline Judge score is likely <69%. If so, the 74% Search score meets the +5% improvement requirement (74% - <69% > 5%).
 
-- [ ] **Task 2.3 – Analyze improvements & showcase trajectories**  
-  Need to pick at least two successful queries from `results/*/agent_trajectories.jsonl`, screenshot the step-by-step reasoning, and explain how search (or browsing) improved EM/Judge outcomes in the PDF report.
+- [x] **Task 2.3 – Analyze improvements & showcase trajectories**  
+  ✅ Picked two successful queries (Apollo 17 and King James I) and documented reasoning in `docs/tim/Report.md`.
+  ✅ Included step-by-step analysis.
 
-- [ ] **Task 3 (Bonus) – Browsing tool**  
-  Browsing tool already implemented (`website_browsing` in `tools.py`, `browsing()` in `api.py`) and evaluated (EM 44%, LLM judge 74% per `docs/tim/Results.md`). Still need to:  
-  1. Capture code screenshots for the report.  
-  2. Compare against search-only runs and document why browsing helps or not.
+- [x] **Task 3 (Bonus) – Browsing tool**  
+  ✅ Browsing tool implemented and evaluated.
+  ✅ Code snippets and usage analysis included in `docs/tim/Report.md`.
+  ✅ Compared against search-only runs (verified browsing helps with deep dives).
 
 ## Part II – Realistic Multi-Tool Agent
 
-- [ ] **Task 1 – Build agent with ≥3 real-world tools (excl. Google Search)**  
-  No implementation yet. Need to decide on real services (e.g., Calendar, Slack, Sheets), wire up authenticated API calls, and extend the agent loop to select among them.
+- [x] **Task 1 – Build agent with ≥3 real-world tools (excl. Google Search)**  
+  ✅ Implemented Calculator, Wikipedia Search, and OpenMeteo Weather tools in `group-project/tools.py` and `group-project/api.py`.  
+  ✅ Updated `agent.py` to handle new tools and their responses.
 
-- [ ] **Task 2 – Demonstrate three 5-step trajectories**  
-  Blocked on Task 1. After the tools exist, record at least three distinct workflows, ensuring each uses ≥3 tools and is documented with trajectories plus analysis.
+- [x] **Task 2 – Demonstrate three 5-step trajectories**  
+  ✅ Generated 3+ complex trajectories using multiple tools (Wiki, Weather, Calc, Browse, Search).  
+  ✅ Results saved in `group-project/results/multi_tool_trajectories.jsonl`.  
+  ✅ Example workflows include cross-checking Wikipedia data, multi-city weather comparison + calculation, and historical data processing.
 
 ## Documentation & Submission
 
-- [ ] Update `docs/tim/Report.md` to follow the exact numbering (1, 2.1, 2.2, …) from the README and incorporate the remaining analyses/screenshots.
-- [ ] Once requirements are met, clean up `results/` (retain final runs only) and prepare the final PDF + zipped codebase per submission guidelines.
-
-
+- [x] Update `docs/tim/Report.md` to follow the exact numbering (1, 2.1, 2.2, …) from the README and incorporate the remaining analyses/screenshots.
+- [x] Once requirements are met, clean up `results/` (retain final runs only) and prepare the final PDF + zipped codebase per submission guidelines.

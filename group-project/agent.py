@@ -1,15 +1,17 @@
 from api import client
 from tools import tools_list
-from api import run_search, browsing
+from api import run_search, browsing, calculator, wikipedia_search, get_weather
 import json
 
 # Map tool names to functions
 available_tools = {
     "google_search": run_search,
-    "website_browsing": browsing
+    "website_browsing": browsing,
+    "calculator": calculator,
+    "wikipedia_search": wikipedia_search,
+    "get_weather": get_weather
 }
-system_prompt = """You are a precise, helpful and reassuring assistant. You can search the web, and browse
-full websites to find more information. Use these tools to find accurate and up-to-date information to answer the questions.
+system_prompt = """You are a precise, helpful and reassuring assistant. You can search the web, browse full websites, calculate math, look up wikipedia, and check weather to find more information. Use these tools to find accurate and up-to-date information to answer the questions.
 You MUST output your final answer in strict JSON format with exactly one field:
 1. "answer": The precise entity, date, name, or number requested.
 
@@ -127,6 +129,17 @@ def run_search_agent(question, max_steps=5):
                                 "retrieved_documents": retrieved_documents}
                             
                             trajectory_log["steps"].append(step_record)
+                        
+                        else:
+                            # Handle other tools (calculator, wikipedia, weather)
+                            tool_response = str(raw_results)
+                            step_record = {
+                                "step_numer": steps,
+                                "action": function_name,
+                                "args": function_args,
+                                "result": tool_response
+                            }
+                            trajectory_log["steps"].append(step_record)
 
                         messages.append({
                             "tool_call_id": tool_call.id,
@@ -195,5 +208,5 @@ def run_base_agent(query):
 
 if __name__ == "__main__":
     #short, messages, traj_log = run_search_agent("who was the ruler of england in 1616?")
-    short, messages, traj_log = run_search_agent("")
+    short, messages, traj_log = run_search_agent("Calculate 25 * 48 and tell me the weather in Paris")
     print(traj_log)
