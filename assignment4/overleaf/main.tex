@@ -1,0 +1,173 @@
+\documentclass{article}
+
+\usepackage{arxiv}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{hyperref}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{booktabs}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{caption}
+\usepackage{subcaption}
+
+\graphicspath{{figures/}}
+
+% Code listing style
+\lstset{
+    basicstyle=\ttfamily\footnotesize,
+    breaklines=true,
+    frame=single,
+    numbers=left,
+    numberstyle=\tiny,
+    backgroundcolor=\color{gray!5},
+    language=Python,
+    keywordstyle=\color{blue},
+    stringstyle=\color{green!50!black},
+    commentstyle=\color{gray}
+}
+
+\title{COMP4901B Homework 4 \\ AIME Math Problem Solver with Python Tool}
+
+\author{
+  Phongsakon Mark Konrad \\
+  SENG, Exchange Student \\
+  Hong Kong University of Science and Technology (HKUST) \\
+  Clear Water Bay, Hong Kong \\
+  Student ID: 21291042 \\
+  \texttt{pmkonrad@connect.ust.hk}
+}
+
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\section{Introduction}
+In this homework, I extended our group project's search agent to support Python code execution. The goal was to help the DeepSeek model solve AIME math problems by allowing it to run calculations instead of just guessing or doing mental math. I implemented a tool that runs Python scripts and an agent loop that uses this tool to iteratively solve problems.
+
+\section{Step 1: Python Code Execution Tool}
+
+For the first step, I built a function called \texttt{run\_python\_code} that takes a string of code and runs it. I used the \texttt{subprocess} library to run the code in a separate process. This is safer and cleaner than using \texttt{exec()} directly in the main script. 
+
+I also set a timeout of 40 seconds so the agent doesn't get stuck in infinite loops. The function captures everything printed to \texttt{stdout} and returns it to the agent. If there's an error (like a syntax error), it captures \texttt{stderr} and returns that instead, so the agent can fix its own code.
+
+Here is the core implementation of my tool:
+
+\begin{lstlisting}[caption={Implementation of the Python execution tool}]
+def run_python_code(script: str):
+    """
+    Executes Python script in a separate process.
+    Captures stdout and stderr for the agent.
+    """
+    try:
+        # Run the code
+        process = subprocess.run(
+            [sys.executable, "-c", script], 
+            capture_output=True, 
+            text=True, 
+            timeout=40 
+        )
+        
+        # Check results
+        if process.returncode == 0:
+            std_out = process.stdout
+            if not std_out:
+                return "Code ran successfully (No output)."
+            return f"Standard Output:\n{std_out}"
+        else:
+            return f"Execution Error:\n{process.stderr}"
+
+    except subprocess.TimeoutExpired:
+        return "Error: Execution timed out."
+    except Exception as e:
+        return f"System Error: {str(e)}"
+\end{lstlisting}
+
+\section{Step 2: Agent Implementation}
+
+For the agent, I reused the structure from our group project but adapted it for math. I defined the \texttt{solve\_aime\_problem} function which runs a loop for up to 20 steps. 
+
+In the system prompt, I specifically told the agent to:
+\begin{itemize}
+    \item Write complete scripts (not just one-liners).
+    \item Print the results so the tool can capture them.
+    \item Use libraries like \texttt{sympy} and \texttt{numpy} for hard calculations.
+    \item Put the final answer in a \texttt{\textbackslash boxed\{\}} format.
+\end{itemize}
+
+The agent loop checks if the model wants to call a tool. If it does, I execute the Python code and feed the output back as a "tool" message. If it outputs text, I look for the boxed answer.
+
+\begin{lstlisting}[caption={The Agent Loop}]
+def solve_aime_problem(problem_text, max_turns=20):
+    convo = [
+        {"role": "system", "content": sys_prompt},
+        {"role": "user", "content": problem_text}
+    ]
+    
+    turn = 0
+    while turn < max_turns:
+        resp = client.chat.completions.create(
+            model="deepseek-chat",
+            messages=convo,
+            tools=tools_list,
+            temperature=0.6,
+            stream=False,
+        )
+
+        msg = resp.choices[0].message
+        convo.append(msg)
+
+        if msg.tool_calls:
+            # ... handle tool calls ...
+            pass
+        else:
+            # No tool call, check for answer
+            extracted = find_boxed_answer(msg.content)
+            if extracted:
+                return f"The answer is \\boxed{{{extracted}}}", convo
+\end{lstlisting}
+
+\section{Step 3: Evaluation Results}
+
+I evaluated the agent in two settings using the provided script. 
+
+\subsection{Setting 1: Baseline (No Tool)}
+I ran the model without any tools (Single turn generation).
+\begin{itemize}
+    \item \textbf{Accuracy}: 61.67\%
+    \item \textbf{Correct}: 74 / 120 rollouts
+\end{itemize}
+
+\subsection{Setting 2: With Python Tool}
+I ran the agent with the Python tool enabled (Max 20 turns).
+\begin{itemize}
+    \item \textbf{Accuracy}: 73.33\%
+    \item \textbf{Correct}: 88 / 120 rollouts
+\end{itemize}
+
+\subsection{Comparison}
+
+Adding the Python tool significantly improved performance, jumping from ~61\% to ~73\%. The agent was able to solve problems that required heavy arithmetic or checking many cases, which the raw LLM often messed up.
+
+\begin{table}[h]
+    \centering
+    \begin{tabular}{lcc}
+        \toprule
+        \textbf{Metric} & \textbf{Baseline (No Tool)} & \textbf{Agent (With Tool)} \\
+        \midrule
+        Total Problems & 30 & 30 \\
+        Rollouts per Problem & 4 & 4 \\
+        Total Rollouts & 120 & 120 \\
+        Correct Count & 74 & 88 \\
+        \textbf{Accuracy} & \textbf{61.67\%} & \textbf{73.33\%} \\
+        \bottomrule
+    \end{tabular}
+    \caption{Comparison of Accuracy between Baseline and Python Agent}
+    \label{tab:results}
+\end{table}
+
+\end{document}

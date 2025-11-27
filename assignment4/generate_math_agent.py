@@ -2,85 +2,100 @@ import json
 import os
 import time
 import threading
+import sys
 from concurrent.futures import ThreadPoolExecutor, as_completed
-from aime_math_agent import run_math_agent, extract_boxed_answer
 
-# Configuration of input/output path and parameters
-# Set paths for uni gpu cluster, to run in background
-input_file = "/store/comp4901b/tladam/COMP4901B-LLMs/assignment4/data/aime24.jsonl" 
-# Switching output to the 'math' version since we are using tools now
-output_file = "assignment4/results/aime24_results_math.jsonl"
+# Add the src directory to path so we can import the agent
+sys.path.append(os.path.join(os.path.dirname(os.path.abspath(__file__)), 'src'))
+from aime_math_agent import solve_aime_problem
 
-num_rollouts = 4
-temperature = 0.6
-model = "deepseek-chat"
+# Configuration
+# Attempt to find the input file robustly
+INPUT_FILE = "/store/comp4901b/tladam/COMP4901B-LLMs/assignment4/data/aime24.jsonl"
+if not os.path.exists(INPUT_FILE):
+    # Check local relative path
+    local_input = os.path.join(os.path.dirname(os.path.abspath(__file__)), "data", "aime24.jsonl")
+    if os.path.exists(local_input):
+         INPUT_FILE = local_input
+    else:
+         INPUT_FILE = "assignment4/data/aime24.jsonl"
 
-# Using different threads to run rollouts parallelly
+OUTPUT_FILE = "assignment4/results/aime24_results_math.jsonl"
 
-def generate_rollouts_math():
-    os.makedirs(os.path.dirname(output_file), exist_ok=True)
-    print(f"Starting MATH AGENT Rollout (N={num_rollouts}, Temp={temperature})...")
+NUM_ROLLOUTS = 4
+TEMP = 0.6
+
+def run_evaluation_loop():
+    os.makedirs(os.path.dirname(OUTPUT_FILE), exist_ok=True)
+    print(f"Starting Evaluation (N={NUM_ROLLOUTS}, T={TEMP})...")
+    
+    if not os.path.exists(INPUT_FILE):
+        print(f"Error: Input file {INPUT_FILE} not found.")
+        return
 
     file_lock = threading.Lock()
 
-    with open(input_file, 'r') as f_in, \
-         open(output_file, 'w') as f_out:
+    # Load all problems
+    try:
+        with open(INPUT_FILE, 'r') as f:
+            problems = [json.loads(line) for line in f]
+    except Exception as e:
+        print(f"Failed to read input file: {e}")
+        return
 
-        for line in f_in:
-            entry = json.loads(line)
-            problem_text = entry.get('problem', entry.get('question'))
-            gold_answer = entry.get('answer', entry.get('solution'))
+    # Open output file in append mode (or write to clear?) 
+    # We clear it to start fresh
+    with open(OUTPUT_FILE, 'w') as f:
+        pass
+
+    with open(OUTPUT_FILE, 'a') as f_out:
+        for entry in problems:
+            problem_text = entry.get('problem') or entry.get('question')
+            gold_answer = entry.get('answer') or entry.get('solution')
             q_id = entry.get('id', 'unknown')
 
-            print(f"Processing ID {q_id} (Launching {num_rollouts} agents)...")
+            print(f"Processing Problem ID {q_id}...")
 
-            # Wrapper to run the agent logic inside the thread pool
-            def fetch_rollout(rollout_index):
+            def run_single_rollout(rid):
                 try:
-                    # Call the Agent Loop
-                    final_ans, messages = run_math_agent(problem_text)
-                    
+                    # Call our agent
+                    res_text, _ = solve_aime_problem(problem_text, max_turns=20)
                     return {
-                        "status": "success",
-                        "rollout_id": rollout_index,
-                        "llm_response": final_ans
+                        "status": "ok",
+                        "rid": rid,
+                        "output": res_text
                     }
-                except Exception as e:
+                except Exception as err:
                     return {
-                        "status": "error", 
-                        "rollout_id": rollout_index, 
-                        "error": str(e)
+                        "status": "error",
+                        "rid": rid,
+                        "msg": str(err)
                     }
 
-            # Run 4 Agents in Parallel
-            with ThreadPoolExecutor(max_workers=num_rollouts) as executor:
-                future_to_id = {
-                    executor.submit(fetch_rollout, i): i 
-                    for i in range(num_rollouts)
-                }
-
-                for future in as_completed(future_to_id):
-                    result = future.result()
-                    
-                    if result["status"] == "success":
-                        record = {
+            # Parallel execution
+            with ThreadPoolExecutor(max_workers=NUM_ROLLOUTS) as pool:
+                futures = {pool.submit(run_single_rollout, i): i for i in range(NUM_ROLLOUTS)}
+                
+                for fut in as_completed(futures):
+                    result = fut.result()
+                    if result["status"] == "ok":
+                        row = {
                             "id": q_id,
-                            "rollout_id": result["rollout_id"],
+                            "rollout_id": result["rid"],
                             "problem": problem_text,
                             "answer": gold_answer,
-                            "llm_response": result["llm_response"]
+                            "llm_response": result["output"]
                         }
-                        
                         with file_lock:
-                            f_out.write(json.dumps(record) + "\n")
+                            f_out.write(json.dumps(row) + "\n")
                             f_out.flush()
                     else:
-                        print(f"Error on rollout {result['rollout_id']}: {result['error']}")
+                        print(f"  Rollout {result['rid']} Error: {result['msg']}")
 
-            print(f"Finished ID {q_id}. Cooling down for 5 seconds...")
-            time.sleep(5) 
+            print(f"Finished ID {q_id}. Pausing...")
+            time.sleep(2)
 
-    print(f"Done! Results saved to {output_file}")
+    print(f"Evaluation Complete. Results in {OUTPUT_FILE}")
 
 if __name__ == "__main__":
-    generate_rollouts_math()
+    run_evaluation_loop()

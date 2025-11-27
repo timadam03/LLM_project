@@ -3,13 +3,33 @@ import json
 import os
 import time
 import threading
+import sys
 from concurrent.futures import ThreadPoolExecutor, as_completed
-from aime_math_agent import extract_boxed_answer
+
+# Fix imports for extract_boxed_answer since we moved the file
+sys.path.append(os.path.join(os.path.dirname(os.path.abspath(__file__)), 'src'))
+try:
+    from aime_math_agent import find_boxed_answer
+except ImportError:
+    # Define fallback if import fails (to avoid breaking base generation)
+    def find_boxed_answer(text):
+        if not text: return None
+        if "\\boxed{" in text:
+            return text.split("\\boxed{")[1].split("}")[0] # primitive fallback
+        return None
 
 # Configuration of input/output path and parameters
 # Set paths for uni gpu cluster, to run in background
-input_file = "/store/comp4901b/tladam/COMP4901B-LLMs/assignment4/data/aime24.jsonl"
-output_file_base = "/store/comp4901b/tladam/COMP4901B-LLMs/assignment4/results/aime24_results_no_math.jsonl"
+INPUT_FILE = "/store/comp4901b/tladam/COMP4901B-LLMs/assignment4/data/aime24.jsonl"
+if not os.path.exists(INPUT_FILE):
+    # Check local relative path
+    local_input = os.path.join(os.path.dirname(os.path.abspath(__file__)), "data", "aime24.jsonl")
+    if os.path.exists(local_input):
+         INPUT_FILE = local_input
+    else:
+         INPUT_FILE = "assignment4/data/aime24.jsonl"
+
+OUTPUT_FILE = "assignment4/results/aime24_results_nomath_1.jsonl"
 
 num_rollouts = 4
 temperature = 0.6
@@ -23,15 +43,22 @@ OUTPUT FORMAT:
 
 def generate_rollouts_base():
     # 1. Setup
-    os.makedirs("results/", exist_ok=True)
+    os.makedirs(os.path.dirname(OUTPUT_FILE), exist_ok=True)
     
     print(f"Starting FAST Rollout Generation (N={num_rollouts}, Temp={temperature})...")
 
     # We need a lock so multiple threads don't scramble the file writing
     file_lock = threading.Lock()
 
-    with open(input_file, 'r') as f_in, \
-         open(output_file_base, 'w') as f_out:
+    try:
+        with open(INPUT_FILE, 'r') as f:
+            pass
+    except FileNotFoundError:
+        print(f"Error: Input file {INPUT_FILE} not found.")
+        return
+
+    with open(INPUT_FILE, 'r') as f_in, \
+         open(OUTPUT_FILE, 'w') as f_out:
 
         # 2. Process each question
         for line in f_in:
@@ -60,7 +87,7 @@ def generate_rollouts_base():
                     full_content = response.choices[0].message.content
                     
                     # Extract only the final boxed answer for the "llm_response" field
-                    extracted = extract_boxed_answer(full_content)
+                    extracted = find_boxed_answer(full_content)
                     
                     # If extraction succeeds, format it nicely. If not, keep full text for debugging.
                     final_response_text = f"The answer is \\boxed{{{extracted}}}" if extracted else full_content
@@ -110,7 +137,7 @@ def generate_rollouts_base():
             print(f"Finished ID {q_id}. Cooling down for 5 seconds...")
             time.sleep(5) 
 
-    print(f"Done! Results saved to {output_file_base}")
+    print(f"Done! Results saved to {OUTPUT_FILE}")
 
 if __name__ == "__main__":
     generate_rollouts_base()
