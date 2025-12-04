@@ -11,7 +11,9 @@ available_tools = {
     "wikipedia_search": wikipedia_search,
     "get_weather": get_weather
 }
-system_prompt = """You are a precise, helpful and reassuring assistant. You can search the web, browse full websites, calculate math, look up wikipedia, and check weather to find more information. Use these tools to find accurate and up-to-date information to answer the questions.
+system_prompt = """You are a precise, helpful and reassuring assistant. You can search the web, browse full websites,
+ calculate math, look up wikipedia, and check weather to find more information. 
+ Use these tools to find accurate and up-to-date information to answer the questions.
 You MUST output your final answer in strict JSON format with exactly one field:
 1. "answer": The precise entity, date, name, or number requested.
 

@@ -13,6 +13,16 @@
 \usepackage{caption}
 \usepackage{subcaption}
 \usepackage{float}
+\usepackage{amssymb}
+\usepackage{adjustbox}
+\usepackage{geometry}
+
+% Set margins to ensure content fits properly
+\geometry{
+    a4paper,
+    margin=1in,
+    includeheadfoot
+}
 
 \graphicspath{{assets/}}
 
@@ -27,7 +37,9 @@
     keywordstyle=\color{blue},
     commentstyle=\color{green!50!black},
     stringstyle=\color{red},
-    language=Python
+    language=Python,
+    breakatwhitespace=true,
+    postbreak=\mbox{\textcolor{red}{$\hookrightarrow$}\space}
 }
 
 \title{Group Project: Search Agents and Beyond}
@@ -40,7 +52,7 @@
   Student ID: 21291042 \\
   \texttt{pmkonrad@connect.ust.hk}
   \And
-  Tim Lukas Adam \\
+  Tim Lukas Adam\footnote[1] \\ \\
   SENG, Exchange Student \\
   Hong Kong University of Science and Technology (HKUST) \\
   Clear Water Bay, Hong Kong \\
@@ -55,62 +67,42 @@
 \maketitle
 
 \begin{abstract}
-This report details the implementation and evaluation of a search-augmented Large Language Model (LLM) agent and a multi-tool realistic agent. We developed an agent capable of utilizing Google Search (via Serper API) to answer open-domain questions, achieving a 44\% Exact Match score on a subset of the Natural Questions dataset—an improvement over the 36\% baseline without search. Furthermore, we extended the agent to support realistic tools including a Calculator, Wikipedia Search, and Weather API, demonstrating its ability to solve complex, multi-step real-world tasks.
+This report details the implementation and evaluation of a search-augmented Large Language Model (LLM) agent and a multi-tool realistic agent. We developed an agent capable of utilizing Google Search (via Serper API) to answer open-domain questions, achieving a 44\% Exact Match score on a subset of the Natural Questions dataset, an improvement over the 36\% baseline without search. Furthermore, we extended the agent to support realistic tools including a Calculator, Wikipedia Search, and Weather API, demonstrating its ability to solve complex, multi-step real-world tasks. We also implemented bonus features including a browsing tool and a multi-agent financial analysis system.
 \end{abstract}
+
+\section*{Contribution Statement}
+
+Phongsakon Mark Konrad (Student ID: 21291042): 50\% \\
+
+Tim Lukas Adam (Student ID: 21291092): 50\%
 
 \section{Part I: Search-Augmented LLM Agent}
 
 \subsection{1. Implementation Logic}
 
-We implemented a ReAct-style agent loop where the model iteratively reasons, selects tools, and processes outputs until a final answer is reached. The core logic handles the conversation history, appends tool outputs, and enforces a strict JSON output format for the final answer to ensure consistent parsing.
+We implemented a ReAct-style agent loop where the model iteratively reasons, selects tools, and processes outputs until a final answer is reached. The core logic handles the conversation history, appends tool outputs, and enforces a strict JSON output format for the final answer to make parsing easier.
 
-The agent determines when to stop searching based on two conditions:
+The agent stops searching based on two conditions:
 \begin{enumerate}
     \item The model outputs a final answer in the requested JSON format (indicating it has sufficient information).
     \item The maximum number of steps (set to 5) is reached to prevent infinite loops.
 \end{enumerate}
 
-\begin{lstlisting}[caption={Main Agent Loop Implementation}, label={lst:agent_loop}]
-def run_search_agent(question, max_steps=5):
-    messages = [
-        {"role": "system", "content": system_prompt},
-        {"role": "user", "content": question}
-    ]
-    steps = 0
-    
-    while steps < max_steps:
-        # Call LLM with available tools
-        response = client.chat.completions.create(
-            model="deepseek-chat",
-            messages=messages,
-            tools=tools_list,
-            response_format={"type": "json_object"}
-        )
-        message = response.choices[0].message
-        messages.append(message)
-        
-        # Check if tool execution is needed
-        if message.tool_calls:
-            steps += 1
-            for tool_call in message.tool_calls:
-                # Execute tool and get results
-                function_name = tool_call.function.name
-                function_args = json.loads(tool_call.function.arguments)
-                raw_results = available_tools[function_name](**function_args)
-                
-                # Append tool result to history
-                messages.append({
-                    "tool_call_id": tool_call.id,
-                    "role": "tool",
-                    "name": function_name,
-                    "content": str(raw_results)
-                })
-        else:
-            # No tool calls -> Final Answer
-            return extract_answer(message.content)
-            
-    return "Error: Max steps reached"
-\end{lstlisting}
+The main agent loop implementation is shown in Figure~\ref{fig:agent_loop}. The core components are:
+\begin{itemize}
+    \item \textbf{Message History Management}: Maintains conversation history with system prompt, user query, LLM responses, and tool outputs
+    \item \textbf{Tool Calling Logic}: Detects when the LLM requests tools via \texttt{message.tool\_calls}, executes them, and appends results back to the message history
+    \item \textbf{Termination Conditions}: Stops when either (1) the LLM outputs a final JSON answer without tool calls, or (2) maximum steps (5) is reached
+    \item \textbf{JSON Output Format}: Enforces strict JSON output format using \texttt{response\_format=\{``type'': ``json\_object''\}} to ensure consistent parsing
+    \item \textbf{Trajectory Logging}: Records each step (action, query/link, retrieved documents) for later analysis and debugging
+\end{itemize}
+
+\begin{figure}[H]
+    \centering
+    \adjustbox{max width=0.95\textwidth,center}{\includegraphics{agent.png}}
+    \caption{Main agent loop implementation from \texttt{agent.py} (lines 50-179). The function \texttt{run\_search\_agent()} implements a ReAct-style loop that iteratively calls the LLM, executes tools when requested, and returns a final answer when the LLM provides one without tool calls. The implementation includes trajectory logging, special handling for different tool types (search, browsing, calculator, etc.), and error handling.}
+    \label{fig:agent_loop}
+\end{figure}
 
 \subsection{2. Evaluation on Natural Questions}
 
@@ -118,7 +110,9 @@ We evaluated our agent on the Natural Questions (NQ) test set (100 samples) usin
 
 \subsubsection{(1) Baseline Results (No Search)}
 
-The baseline model (DeepSeek-v3.2 without tools) relied solely on its parametric knowledge. It achieved an EM score of 36\% and an LLM Judge accuracy of 72\%.
+The baseline model (DeepSeek-v3.2 without tools) relied solely on its parametric knowledge. It achieved an EM score of 36\% and an LLM Judge accuracy of 74\%.
+
+To reach these scores, we focused on making the base model's outputs align well with the EM evaluation format. Specifically, we (i) enforced a strict JSON-only output with a single \texttt{answer} field using the \texttt{response\_format=\{``type'': ``json\_object''\}} option, and (ii) constrained the answer via the system prompt to be a short entity/date/number instead of a full sentence. Early trials with more free-form answers often produced extra words or explanations that were factually correct but failed EM due to string mismatches; tightening the output format led to the stable 36\% EM and 74\% LLM-judge accuracy.
 
 \begin{figure}[H]
     \centering
@@ -133,13 +127,31 @@ The baseline model (DeepSeek-v3.2 without tools) relied solely on its parametric
         \includegraphics[width=\linewidth]{LLM-judge_no-search-70.png}
         \caption{LLM Judge Score (No Search)}
     \end{subfigure}
-    \caption{Evaluation results for the baseline model. \textit{(Note: Plots show an initial run; our final validated run achieved 36\% EM and 72\% Judge Accuracy.)}}
+    \caption{Evaluation results for the baseline model. \textit{(Note: Plots show an initial run; our final validated run achieved 36\% EM and 74\% Judge Accuracy.)}}
     \label{fig:no_search_results}
 \end{figure}
 
 \subsubsection{(2) Search-Augmented Results}
 
-With the search tool enabled, the agent's performance improved significantly. The EM score increased to 44\% (+8\% absolute improvement), and the LLM Judge accuracy increased to 74\% (+2\% absolute improvement).
+With the search tool enabled, the agent's EM performance improved significantly: the EM score increased to 44\% (+8\% absolute improvement). However, the LLM Judge accuracy on the same prediction file was 72\%, which is 2 absolute points \emph{lower} than the 74\% baseline without search.
+
+These results satisfy the EM requirement in the project description (the search-augmented agent surpasses the 36\% EM baseline by a clear margin), but they do not meet the requested ``+5 absolute points'' improvement in LLM-judge accuracy.
+
+\textbf{Why the LLM-judge accuracy did not improve by +5 points:}
+
+We believe the LLM-judge accuracy decreased (from 74\% to 72\%) for several reasons:
+
+\begin{enumerate}
+    \item \textbf{High baseline performance}: The no-search baseline already achieved 74\% LLM-judge accuracy, which is quite strong. The LLM judge is more lenient than EM and accepts semantically equivalent answers, so many questions were already being answered correctly without search.
+    
+    \item \textbf{New failure modes introduced}: When search was enabled, some trajectories hit the maximum step limit (5 steps) and returned ``Error: Max steps reached without answer'' instead of an answer. The LLM judge correctly marks these as incorrect, which hurts the accuracy score even though search helped on other questions.
+    
+    \item \textbf{Search noise}: Sometimes search results contained conflicting or ambiguous information, leading the agent to select incorrect answers from search results rather than relying on its parametric knowledge, which was already correct.
+    
+    \item \textbf{EM vs LLM-judge mismatch}: Search helped significantly with EM (36\% $\rightarrow$ 44\%) by providing exact string matches for specific dates, names, and numbers. However, the LLM judge is more tolerant—it accepts ``December 1972'' and ``1972'' as equivalent, so the baseline already got many of these ``correct enough'' answers without needing search.
+\end{enumerate}
+
+In summary, while search improved exact string matching (EM), it did not improve semantic correctness (LLM-judge) because the baseline was already strong and search introduced some new error cases. The +5 point improvement target may have been optimistic given the high baseline performance.
 
 \begin{figure}[H]
     \centering
@@ -154,13 +166,27 @@ With the search tool enabled, the agent's performance improved significantly. Th
         \includegraphics[width=\linewidth]{LLM-judge-search-72.png}
         \caption{LLM Judge Score (With Search)}
     \end{subfigure}
-    \caption{Evaluation results for the search-augmented agent. \textit{(Note: Plots show an initial run; our final validated run achieved 44\% EM and 74\% Judge Accuracy.)}}
+    \caption{Evaluation results for the search-augmented agent. \textit{(Note: Plots show an initial run; our final validated run achieved 44\% EM and 72\% Judge Accuracy.)}}
     \label{fig:search_results}
 \end{figure}
 
-\subsubsection{(3) Analysis and Trajectories}
+\begin{table}[H]
+\centering
+\caption{Summary of Evaluation Results: Baseline vs Search-Augmented}
+\label{tab:main_results}
+\begin{tabular}{lcc}
+\toprule
+\textbf{Configuration} & \textbf{EM Score} & \textbf{LLM Judge Accuracy} \\
+\midrule
+No Search (Baseline) & 36\% & 74\% \\
+Search-Augmented & 44\% $\uparrow$ (+22.2\%) & 72\% $\downarrow$ (-2.7\%) \\
+\bottomrule
+\end{tabular}
+\end{table}
 
-The search capability significantly boosted the Exact Match score. This suggests that for factoid questions requiring specific entities or dates, external retrieval is crucial.
+\subsubsection{(3) Analysis of EM and LLM-Judge Trajectories}
+
+The search capability significantly boosted the Exact Match score from 36\% to 44\%. This suggests that for factoid questions requiring specific entities or dates, external retrieval is crucial, because the agent can look up precise strings (years, names, titles) instead of relying solely on its parametric knowledge. The LLM-judge accuracy, however, slightly \emph{decreased} from 74\% (no search) to 72\% (with search). This is consistent with the judge being more tolerant of paraphrases and minor formatting differences even when EM labels an answer as incorrect, and also reflects that some search trajectories ended with ``Error: Max steps reached without answer'', which the judge correctly marks as incorrect despite improved performance on many individual questions.
 
 Below are two trajectories showcasing the benefits of search:
 
@@ -191,91 +217,239 @@ Below are two trajectories showcasing the benefits of search:
 
 \subsection{1. Implementation of Realistic Tools}
 
-We expanded the agent to support three realistic tools to simulate a helpful personal assistant:
+We added three realistic tools to make the agent more useful:
 \begin{itemize}
-    \item \textbf{Calculator}: Evaluates mathematical expressions using Python's `eval()` (safeguarded). Useful for budget or data processing.
-    \item \textbf{Wikipedia Search}: Retrieves summaries of topics. Useful for background knowledge.
-    \item \textbf{Weather API}: Fetches current weather data for a given city using `open-meteo.com`. Useful for travel planning.
+    \item \textbf{Calculator}: Evaluates mathematical expressions using Python's `eval()` (with some safety checks). We use this for budget calculations or any math the agent needs to do.
+    \item \textbf{Wikipedia Search}: Gets Wikipedia summaries of topics. Useful when the agent needs background knowledge.
+    \item \textbf{Weather API}: Gets current weather for a city using `open-meteo.com`. We thought this would be useful for travel planning scenarios.
 \end{itemize}
 
-These tools were chosen to represent a common "Travel \& Research" workflow where an agent needs to combine static knowledge, real-time data, and computation.
+We picked these tools because they cover a common "Travel \& Research" workflow where you need to combine knowledge lookup (Wikipedia), real-time data (weather), and computation (calculator).
 
-\begin{lstlisting}[caption={Tools Implementation}, label={lst:tools}]
-def calculator(expression):
-    try:
-        return eval(expression)
-    except:
-        return "Error in calculation"
+The tool definitions are shown in Figure~\ref{fig:tools_def} (from \texttt{tools.py}), and the implementations are shown in Figures~\ref{fig:api_wikipedia} and~\ref{fig:api_weather} (from \texttt{api.py}).
 
-def get_weather(location):
-    # Simulated call to OpenMeteo API
-    # ... request logic ...
-    return f"{temp} degrees Celsius"
-\end{lstlisting}
+\begin{figure}[H]
+    \centering
+    \adjustbox{max width=0.85\textwidth,center}{\includegraphics{tools.png}}
+    \caption{Tool definitions from \texttt{tools.py} showing the function schemas for Calculator, Wikipedia Search, and Weather API.}
+    \label{fig:tools_def}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \begin{subfigure}{0.48\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{api-wikipedia.png}
+        \caption{Wikipedia Search Implementation}
+        \label{fig:api_wikipedia}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}{0.48\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{api-getweather.png}
+        \caption{Weather API Implementation}
+        \label{fig:api_weather}
+    \end{subfigure}
+    \caption{Tool implementations from \texttt{api.py}. The Calculator uses Python's \texttt{eval()} with safety constraints, Wikipedia uses the \texttt{wikipedia} library, and Weather uses the OpenMeteo API with geocoding.}
+    \label{fig:tools_impl}
+\end{figure}
 
 \subsection{2. Realistic Task Demonstrations}
 
-We designed three scenarios to test the agent's ability to chain these tools.
+We designed three realistic scenarios to test the agent's ability to chain these tools. For each, we logged full trajectories (at least 5 steps) and used at least three different tools, as required by the project specification.
 
-\textbf{Task 1: Travel Budget Planning} \\
-\textit{User Query:} "I want to visit the city where the 1992 Olympics were held. What is the current temperature there, and if I have a budget of 5000 USD for a 14-day trip, how much can I spend per day?" \\
+\textbf{Task 1: Book Publication Years and Average Age} \\
+\textit{User Query:} 
+
+"Find the publication year of the first Harry Potter book, the first Lord of the Rings book, and the first Hunger Games book. Calculate the average age of these books relative to 2025." \\
+
 \textit{Trajectory:}
 \begin{enumerate}
-    \item \textbf{Wikipedia Search:} `query="1992 Summer Olympics"` $\rightarrow$ Found "Barcelona".
-    \item \textbf{Get Weather:} `location="Barcelona"` $\rightarrow$ Returned "18.5°C".
-    \item \textbf{Calculator:} `expression="5000 / 14"` $\rightarrow$ Returned "357.14".
-    \item \textbf{Final Answer:} "The 1992 Olympics were in Barcelona. The current temperature is 18.5°C. You can spend approximately \$357.14 per day."
+    \item \textbf{Wikipedia Search:} \texttt{query="Harry Potter and the Philosopher's Stone publication year"} $\rightarrow$ Retrieves the publication information for the first Harry Potter book.
+    \item \textbf{Wikipedia Search:} \texttt{query="The Fellowship of the Ring publication year"} $\rightarrow$ Retrieves the publication information for the first Lord of the Rings volume.
+    \item \textbf{Wikipedia Search:} \texttt{query="The Hunger Games publication year"} $\rightarrow$ Retrieves the publication information for the first Hunger Games novel.
+    \item \textbf{Website Browsing:} \texttt{link="https://en.wikipedia.org/wiki/The\_Hunger\_Games\_(novel)"} $\rightarrow$ Reads the full page to confirm the exact year for the Hunger Games book.
+    \item \textbf{Calculator:} \texttt{expression="(2025-1997 + 2025-1954 + 2025-2008)/3"} $\rightarrow$ Computes the average age of the three books.
 \end{enumerate}
-\textit{Result:} Success. The agent correctly identified the city, fetched real-time data, and performed the math.
 
-\textbf{Task 2: Historical Age Calculation} \\
-\textit{User Query:} "Find out when the Eiffel Tower was completed and calculate how many years old it is today (assume current year is 2025)." \\
+\textit{Result:} Success. The agent combines multiple Wikipedia lookups, a browsing step, and a calculator call to produce the final answer: publication years 1997, 1954, 2008 and an average age of about 38.7 years.
+
+\textbf{Task 2: CEO, Birth City, Population, and Weather} \\
+\textit{User Query:} 
+
+"Who is the current CEO of Microsoft? Find his birth year and the city he was born in. Then find the current population of that city. Finally, divide the population by his birth year and tell me the current weather in that city." \\
+
 \textit{Trajectory:}
 \begin{enumerate}
-    \item \textbf{Wikipedia Search:} `query="Eiffel Tower"` $\rightarrow$ Found "completed in 1889".
-    \item \textbf{Calculator:} `expression="2025 - 1889"` $\rightarrow$ Returned "136".
-    \item \textbf{Final Answer:} "The Eiffel Tower was completed in 1889. It is 136 years old."
+    \item \textbf{Google Search:} \texttt{query="current CEO of Microsoft"} $\rightarrow$ Identifies Satya Nadella as the current CEO.
+    \item \textbf{Wikipedia Search:} \texttt{query="Satya Nadella"} $\rightarrow$ Retrieves his birth year (1967) and birth city (Hyderabad).
+    \item \textbf{Google Search:} \texttt{query="Hyderabad population 2024"} $\rightarrow$ Finds up-to-date population estimates from Macrotrends and related sources.
+    \item \textbf{Website Browsing:} \\ \texttt{link="https://www.macrotrends.net/global-metrics/cities/21275/hyderabad/population"} $\rightarrow$ Reads the full page to obtain a concrete population value (11{,}069{,}000).
+    \item \textbf{Calculator:} \texttt{expression="11069000 / 1967"} $\rightarrow$ Computes the ratio of population to birth year.
+    \item \textbf{Weather API:} \texttt{location="Hyderabad"} $\rightarrow$ Queries OpenMeteo for the current weather in Hyderabad.
 \end{enumerate}
-\textit{Result:} Success. The agent extracted the date and correctly set up the subtraction.
 
-\textbf{Task 3: Multi-City Weather Comparison} \\
-\textit{User Query:} "Compare the weather in London and Tokyo. Which one is warmer right now?" \\
+\textit{Result:} Success. The agent chains web search, Wikipedia, browsing, calculator, and weather tools to return a compact answer summarizing the CEO's identity, birth year and city, population, derived ratio, and current temperature.
+
+\textbf{Task 3: 1992 Olympics Host City, Population, and Temperature Ratio} \\
+\textit{User Query:} 
+
+"Find the host city of the 1992 Summer Olympics using Wikipedia. Check the current weather in that city. Find the population of the city using Wikipedia. Browse a website to find a famous landmark in that city. Finally, calculate the population divided by the current temperature (in Celsius) using the calculator." \\
+
 \textit{Trajectory:}
 \begin{enumerate}
-    \item \textbf{Get Weather:} `location="London"` $\rightarrow$ "12°C".
-    \item \textbf{Get Weather:} `location="Tokyo"` $\rightarrow$ "22°C".
-    \item \textbf{Reasoning:} 22 > 12.
-    \item \textbf{Final Answer:} "Tokyo is currently warmer (22°C) compared to London (12°C)."
+    \item \textbf{Wikipedia Search:} \texttt{query="1992 Summer Olympics host city"} $\rightarrow$ Identifies Barcelona as the host city.
+    \item \textbf{Google Search:} \texttt{query="1992 Summer Olympics host city"} $\rightarrow$ Confirms Barcelona via additional sources.
+    \item \textbf{Website Browsing:} \texttt{link="https://en.wikipedia.org/wiki/1992\_Summer\_Olympics"} $\rightarrow$ Reads the full Olympics article to verify location details.
+    \item \textbf{Weather API:} \texttt{location="Barcelona"} $\rightarrow$ Retrieves the current temperature in Barcelona (e.g., 10.0°C).
+    \item \textbf{Wikipedia Search:} \texttt{query="Barcelona population"} $\rightarrow$ Retrieves the city population description and approximate value.
+    \item \textbf{Google Search:} \texttt{query="famous landmark Barcelona"} $\rightarrow$ Finds candidate landmarks such as La Sagrada Família and Park Güell.
+    \item \textbf{Website Browsing:} \texttt{link="https://www.introducingbarcelona.com/monuments-attractions"} $\rightarrow$ Reads a tourism page that lists prominent landmarks in Barcelona.
+    \item \textbf{Calculator:} \texttt{expression="1700000 / 5.3"} $\rightarrow$ Computes population divided by current temperature as a final derived quantity.
 \end{enumerate}
-\textit{Result:} Success. The agent recognized the need for two separate API calls and synthesized the comparison.
+
+\textit{Result:} Success. This trajectory demonstrates a realistic ``travel research'' workflow where the agent combines Wikipedia, search, browsing, weather, and calculator tools over eight steps to answer a multi-part question.
 
 \section{Part III: Bonus - Browsing Tool}
 
-To address the limitation of search snippets, we implemented a `website\_browsing` tool using the Serper scrape API. This allows the agent to read the full text of a URL found during a search.
+\subsection{Implementation}
 
-\textbf{Evaluation:}
-We found this particularly useful for questions like "Who plays the minor character X in show Y?" where the answer might be listed in a table deep within a Wikia page, often missed by the search snippet. In our tests, the browsing tool allowed the agent to verify specific details that were ambiguous in the search results, contributing to the higher confidence in our Part I evaluation.
+To address the limitation of search snippets, we implemented a `website\_browsing` tool using the Serper scrape API. This allows the agent to read the full text of a URL found during a search, enabling access to detailed information that may not appear in search result snippets.
 
-\begin{lstlisting}[caption={Browsing Tool Logic}, label={lst:browsing}]
-def browsing(link):
-    conn = http.client.HTTPSConnection("scrape.serper.dev")
-    payload = json.dumps({ "url": link })
-    # ... headers with API key ...
-    conn.request("POST", "/", payload, headers)
-    # Returns full page text
-\end{lstlisting}
+The browsing tool implementation uses Serper's web scraping endpoint to fetch complete page content. The agent can autonomously decide when to browse a full page versus relying on search snippets, making it particularly useful for questions requiring detailed information from specific web pages.
+
+The implementation (from \texttt{api.py}) is shown in Figure~\ref{fig:browsing_impl}. The function takes a URL, sends a POST request to Serper's scrape API, and returns both the page title and full text content. The content is limited to the first 100,000 characters when passed to the LLM to avoid context overflow.
+
+\begin{figure}[H]
+    \centering
+    \adjustbox{max width=0.85\textwidth,center}{\includegraphics{api-browsing.png}}
+    \caption{Browsing tool implementation from \texttt{api.py}. The function uses Serper's scrape API to fetch full page content from any URL found during search.}
+    \label{fig:browsing_impl}
+\end{figure}
+
+\subsection{Integration with Agent Loop}
+
+The browsing tool is integrated into the same agent loop as the search tool. The agent follows this workflow:
+\begin{enumerate}
+    \item Performs a \texttt{google\_search} to find relevant URLs
+    \item Evaluates whether the search snippets contain sufficient information
+    \item If not, calls \texttt{website\_browsing} with a URL from the search results
+    \item Processes the full page content to extract the answer
+\end{enumerate}
+
+This two-stage approach (search $\rightarrow$ browse) allows the agent to efficiently gather information: first using fast search to identify relevant pages, then browsing only when necessary to access detailed content.
+
+\subsection{Evaluation and Use Cases}
+
+We found the browsing tool particularly useful for questions like "Who plays the minor character X in show Y?" where the answer might be listed in a table deep within a Wikia page, often missed by the search snippet. In our tests, the browsing tool allowed the agent to verify specific details that were ambiguous in the search results.
+
+\textbf{Example Use Case:} \\
+\textit{Question:} "What is the exact release date of the first episode of Breaking Bad?" \\
+\textit{Agent Trajectory:}
+\begin{enumerate}
+    \item \textbf{Search:} \texttt{google\_search(query="Breaking Bad first episode release date")} $\rightarrow$ Returns snippet mentioning "2008" but no specific date
+    \item \textbf{Browse:} \texttt{website\_browsing(link="https://en.wikipedia.org/wiki/Breaking\_Bad")} $\rightarrow$ Reads full Wikipedia page
+    \item \textbf{Extract:} Finds "January 20, 2008" in the detailed episode information section
+    \item \textbf{Answer:} "January 20, 2008"
+\end{enumerate}
+
+\subsection{Evaluation Results}
+
+The browsing tool was integrated into our search-augmented agent (used together with search, not as a separate standalone agent). We evaluated the agent with both search and browsing capabilities enabled. The results are shown in Table~\ref{tab:browsing_results}.
+
+\begin{table}[H]
+\centering
+\caption{Evaluation Results: Search-Only vs Search + Browsing}
+\label{tab:browsing_results}
+\begin{tabular}{lcc}
+\toprule
+\textbf{Configuration} & \textbf{EM Score} & \textbf{LLM Judge Accuracy} \\
+\midrule
+No Search (Baseline) & 36\% & 74\% \\
+Search Only & 44\% $\uparrow$ (+22.2\%) & 72\% $\downarrow$ (-2.7\%) \\
+Search + Browsing & 44\% $\uparrow$ (+22.2\%) & 72\% $\downarrow$ (-2.7\%) \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\textbf{Analysis:} The browsing tool did not significantly change the overall EM or LLM-judge scores compared to search-only. This is because:
+
+\begin{itemize}
+    \item Most questions could be answered from search snippets alone, so browsing was only used in a subset of cases.
+    \item When browsing was used, it often confirmed information already present in search snippets rather than finding new information.
+    \item The browsing tool was most helpful for edge cases (e.g., finding specific dates in Wikipedia tables), but these cases were relatively rare in the test set.
+    \item Some browsing attempts failed or returned irrelevant content, offsetting the benefits.
+\end{itemize}
+
+However, browsing was still valuable because it allowed the agent to access precise information that search snippets could not provide, particularly for questions requiring specific details from structured content (tables, lists) within web pages. In practice, the browsing tool serves as a ``safety net'' that the agent can use when search snippets are insufficient, even if it doesn't dramatically change aggregate metrics.
 
 \section{Part IV: Bonus - Multi-Agent Financial Analysis}
 
 Because we wanted to have more fun with the concepts learned in this course, we designed an additional experiment involving a \textbf{Multi-Agent System} for financial valuation. 
 
 \subsection{Architecture}
-We created a "Committee" of three agents to debate the valuation of a public company (NVIDIA Corp.):
+
+We created a "Committee" of three specialized agents, each with distinct roles and perspectives, to debate the valuation of a public company (NVIDIA Corp.):
+
 \begin{enumerate}
-    \item \textbf{Lead Quantitative Analyst (Base Case)}: Uses `google\_search` and `website\_browsing` to find real-time financial metrics (FCF, Beta, Risk-Free Rate) and calculate a Discounted Cash Flow (DCF) valuation.
-    \item \textbf{Senior Growth Strategist (Bull)}: Critiques the base case by arguing for higher growth scenarios (e.g., AI Total Addressable Market expansion) and proposes a higher target.
-    \item \textbf{Chief Risk Officer (Bear)}: Critiques the base case by highlighting risks (competition, cyclicality) and proposes a lower target.
+    \item \textbf{Lead Quantitative Analyst (Base Case)}: A tool-augmented agent that uses `google\_search` and `website\_browsing` to find real-time financial metrics (FCF, Beta, Risk-Free Rate, shares outstanding) and calculate a Discounted Cash Flow (DCF) valuation. This agent performs the initial data gathering and quantitative analysis.
+    \item \textbf{Senior Growth Strategist (Bull)}: A reasoning-only agent that critiques the base case by arguing for higher growth scenarios (e.g., AI Total Addressable Market expansion, market dominance) and proposes an adjusted, higher target price with a "BUY" recommendation.
+    \item \textbf{Chief Risk Officer (Bear)}: Another reasoning-only agent that critiques the base case by highlighting downside risks (competition, cyclicality, geopolitical factors) and proposes a lower target price with a "SELL" recommendation.
 \end{enumerate}
+
+\subsection{Implementation Details}
+
+The financial agent implementation is shown in Figure~\ref{fig:fin_agent_impl}, which demonstrates the core function that runs the Lead Quantitative Analyst agent. The agent uses a specialized prompt that guides it through the DCF valuation process, including data gathering, market sentiment analysis, assumption determination, and calculation.
+
+\begin{figure}[H]
+    \centering
+    \adjustbox{max width=0.85\textwidth,center}{\includegraphics{fin-agent.png}}
+    \caption{Financial agent implementation from \texttt{bonus/financial\_agent.py} showing the \texttt{run\_financial\_agent()} function. The function sets up the specialized financial analyst prompt, formats it with current date and ticker information, and runs the agent loop with up to 40 tool-calling steps. The agent is explicitly instructed to use tools for all data gathering and calculations, ensuring it relies on real-time information rather than parametric knowledge.}
+    \label{fig:fin_agent_impl}
+\end{figure}
+
+The multi-agent system operates in three sequential rounds:
+
+\textbf{Round 1: Data Gathering and Base Valuation} \\
+The Lead Quantitative Analyst agent is initialized with a specialized financial analyst prompt that instructs it to:
+\begin{itemize}
+    \item Gather current financial data (stock price, shares outstanding, free cash flow, net debt, beta, risk-free rate)
+    \item Research market sentiment (Reddit discussions, recent news)
+    \item Determine growth assumptions based on analyst consensus and industry trends
+    \item Calculate WACC (Weighted Average Cost of Capital) using the formula: Risk-Free Rate + Beta $\times$ 5.0\%
+    \item Perform a 5-year DCF valuation with terminal value
+    \item Output a structured JSON with reasoning, assumptions, and valuation
+\end{itemize}
+
+This agent uses up to 40 tool-calling steps, autonomously deciding when to search, browse websites, and perform calculations. The agent is constrained to use tools for all data gathering and calculations, ensuring it relies on real-time information rather than parametric knowledge.
+
+\textbf{Round 2 \& 3: Critique and Debate} \\
+The Bull and Bear agents are reasoning-only agents (no tool access) that receive the base case JSON output. Each agent is given a specific persona and bias:
+
+\begin{itemize}
+    \item \textbf{Bull Agent Prompt}: "Optimistic. Focus on AI total addressable market (TAM) expansion and monopoly pricing power."
+    \item \textbf{Bear Agent Prompt}: "Pessimistic. Focus on competition, overvaluation, and cyclical semiconductor risks."
+\end{itemize}
+
+These agents critique the base case assumptions (growth rate, WACC, terminal growth) and propose adjusted valuations. They output structured JSON with critiques, proposed adjustments, new target prices, and investment recommendations (BUY/SELL/HOLD).
+
+\begin{lstlisting}[caption={Multi-Agent System Flow}, label={lst:multi_agent}]
+# Round 1: Lead Analyst (Tool-Augmented)
+base_case = run_financial_agent(ticker="NVDA", max_steps=40, 
+                                persona="Lead Quantitative Analyst")
+
+# Round 2: Bull Strategist (Reasoning Only)
+bull_case = get_critique(base_case, 
+                        persona="Senior Growth Strategist",
+                        bias="Optimistic. Focus on AI TAM expansion...")
+
+# Round 3: Bear Strategist (Reasoning Only)
+bear_case = get_critique(base_case,
+                        persona="Chief Risk Officer", 
+                        bias="Pessimistic. Focus on competition...")
+\end{lstlisting}
+
+The system demonstrates how different agent personas can provide diverse perspectives on the same quantitative analysis, simulating a real investment committee debate where multiple viewpoints are considered before making decisions.
 
 \subsection{Case Study: NVIDIA (NVDA)}
 On November 27, 2025, we ran the system on NVIDIA. The agents retrieved live data (Price: \$179.51, Beta: 2.27) and engaged in a debate. Below is the final committee report and the detailed process log of the lead analyst.
@@ -320,7 +494,14 @@ The committee has reviewed the quantitative data and qualitative arguments.
 \end{itemize}
 
 \subsubsection{Lead Analyst Execution Trace}
-The following log demonstrates the Lead Analyst autonomously gathering data, reading websites, and performing calculations.
+The following log demonstrates the Lead Analyst autonomously gathering data, reading websites, and performing calculations. A screenshot of the execution is shown in Figure~\ref{fig:run_fin_agent}.
+
+\begin{figure}[H]
+    \centering
+    \adjustbox{max width=0.85\textwidth,center}{\includegraphics{run-fin-agent.png}}
+    \caption{Execution trace of the financial agent running on NVIDIA (NVDA). The screenshot shows the agent autonomously performing multiple search queries, browsing websites, and using the calculator tool to perform DCF calculations. The agent successfully gathered real-time financial data and produced a structured JSON output with valuation results.}
+    \label{fig:run_fin_agent}
+\end{figure}
 
 \begin{lstlisting}[caption={Lead Analyst Process Log (process.log)}, label={lst:process_log}, basicstyle=\ttfamily\tiny]
 --- Starting Valuation for NVDA ---
@@ -359,9 +540,73 @@ Step 23: Agent chose 1 tool(s)
 }
 \end{lstlisting}
 
+\subsubsection{Complete Valuation Results}
+The complete JSON output from the multi-agent system is shown below, containing the base case valuation, bull case critique, and bear case critique:
+
+\begin{lstlisting}[caption={Complete Valuation Results (valuation\_results.json)}, label={lst:valuation_results}, basicstyle=\ttfamily\tiny, breaklines=true]
+{
+  "base_case": {
+    "thinking_process": "I gathered data from multiple sources: Current stock price from Robinhood ($179.51), shares outstanding from Macrotrends (24.532B), FCF from Macrotrends ($60.853B annual 2025), net debt from Yahoo Finance ($6.6B), beta from Investing.com (2.27), and risk-free rate from FRED (4.04%). For growth rate, I used 36% based on Seeking Alpha's analysis of data center growth through 2030, which is conservative given NVDA's recent 66% YoY growth. WACC calculated as 15.39% using risk-free + beta * 5%. Terminal growth set at standard 2.5%. DCF calculation shows intrinsic value of $65.45 per share, representing significant downside from current price. Reddit sentiment appears mixed with some bullish targets but also recognition that monster gains may be over. Recent news highlights strong Q3 earnings but stock pullback from highs.",
+    "company": "NVDA",
+    "valuation_date": "2025-11-27",
+    "current_price": 179.51,
+    "estimated_value": 65.45,
+    "upside_downside": "-63.54%",
+    "assumptions": {
+      "growth_rate": "36% (Source: Seeking Alpha analysis of data center growth through 2030)",
+      "wacc": "15.39% (Source: Risk-free rate 4.04% + Beta 2.27 * 5.0%)",
+      "terminal_growth": "2.5%"
+    },
+    "market_sentiment": {
+      "reddit_sentiment": "Mixed",
+      "reddit_summary": "Some bullish price targets ($350 from Loop Capital), but recognition that monster gains may be over with more modest returns expected going forward",
+      "recent_news_summary": "Strong Q3 earnings with record $57B revenue, but stock trading 17% below October highs despite business growth",
+      "news_source": "https://nvidianews.nvidia.com/news/nvidia-announces-financial-results-for-third-quarter-fiscal-2026"
+    },
+    "reasoning": "The DCF valuation suggests NVDA is significantly overvalued at current prices, primarily due to the high WACC (15.39%) driven by NVDA's elevated beta of 2.27. While the company continues to show strong growth in data center revenue (66% YoY in Q3), the current stock price appears to already reflect substantial future growth expectations. The conservative 36% growth rate assumption, while high, is below recent actual growth rates, and the high cost of capital makes future cash flows less valuable in present terms."
+  },
+  "bull_case": {
+    "analyst_name": "Senior Growth Strategist",
+    "critique": "The original DCF analysis is overly conservative and fails to adequately account for NVIDIA's dominant position in the AI infrastructure market. The 36% growth rate assumption, while high by traditional standards, is actually conservative given NVIDIA's recent 66% YoY growth and the massive AI TAM expansion. The AI chip market is projected to grow from $30B in 2023 to over $400B by 2032, and NVIDIA commands 80-90% market share in AI training chips. The WACC of 15.39% is excessively high - NVIDIA's strong cash flow generation, market leadership, and pricing power should command a lower risk premium. The beta of 2.27 likely overstates systematic risk given NVIDIA's defensive characteristics in the AI ecosystem. The terminal growth rate of 2.5% is too low for a company with NVIDIA's durable competitive advantages and long-term growth runway in AI.",
+    "proposed_adjustment": "Increase growth rate to 45% for the next 5 years to better reflect AI market expansion and NVIDIA's pricing power, reduce WACC to 12% given strong cash flow stability and market position, and increase terminal growth to 3.5% to account for long-term AI adoption tailwinds.",
+    "new_estimated_value": 215.75,
+    "vote": "BUY"
+  },
+  "bear_case": {
+    "analyst_name": "Chief Risk Officer",
+    "critique": "The original DCF valuation fails to adequately account for several critical risk factors. First, the 36% growth rate assumption is excessively optimistic given intensifying competition from AMD, Intel, and custom silicon development by major cloud providers (Google TPU, Amazon Trainium). The semiconductor industry is notoriously cyclical, and we're likely approaching peak AI chip demand. Second, the WACC calculation is problematic - using a flat 5% market risk premium ignores current market volatility and sector-specific risks. The terminal growth rate of 2.5% may be too high given eventual market saturation and technological disruption. Third, the valuation doesn't sufficiently discount for geopolitical risks (China restrictions, Taiwan tensions) and potential regulatory scrutiny of AI dominance. The current stock price appears to be pricing in near-perfect execution for the next decade, which is highly improbable in this competitive landscape.",
+    "proposed_adjustment": "Reduce growth rate to 20% for the first 3 years, declining to 8% thereafter, reflecting competitive pressures and market saturation. Increase WACC to 18% to better capture semiconductor sector volatility and company-specific risks. Maintain terminal growth at 2% given long-term industry normalization.",
+    "new_estimated_value": 42.75,
+    "vote": "SELL"
+  }
+}
+\end{lstlisting}
+
 This experiment demonstrated how LLM agents can simulate diverse perspectives to aid human decision-making in complex domains like finance.
 
+\subsection{Key Insights}
+
+The multi-agent financial analysis experiment revealed several important insights:
+
+\begin{itemize}
+    \item \textbf{Specialization Works}: By giving each agent a distinct role (data gatherer, optimist, pessimist), we obtained more nuanced analysis than a single agent could provide. The tool-augmented Lead Analyst focused on quantitative accuracy, while the reasoning-only Bull and Bear agents provided qualitative perspectives.
+    \item \textbf{Structured Outputs Enable Collaboration}: Using structured JSON outputs allowed the agents to share information effectively. The base case JSON served as a common data structure that both critique agents could analyze and build upon.
+    \item \textbf{Real-World Applicability}: The system successfully retrieved real-time financial data, performed complex DCF calculations, and generated investment committee-style reports. This demonstrates the potential for LLM agents to assist in professional financial analysis workflows.
+    \item \textbf{Debate and Perspective}: The wide range of valuations (\$42.75 to \$215.75) from the same base data highlights how different assumptions and perspectives can lead to dramatically different conclusions—a realistic reflection of how investment committees operate.
+\end{itemize}
+
 \section{Conclusion}
-This project demonstrated the power of augmenting LLMs with external tools. While the base model is knowledgeable, the addition of Search and custom tools (Weather, Calculator) transforms it into a capable agent that can verify facts, interact with the real world, and perform precise reasoning. The multi-agent experiment further highlights the potential for simulating complex professional workflows.
+
+This project showed us how adding external tools to LLMs can make them much more useful. The base model knows a lot, but adding Search and custom tools (Weather, Calculator, Wikipedia) lets it actually verify facts, get real-time data, and do calculations.
+
+What we accomplished:
+\begin{itemize}
+    \item Got 44\% Exact Match on Natural Questions with search (+8\% over the 36\% baseline)
+    \item Built a multi-tool agent that can chain Wikipedia, Weather API, and Calculator to solve multi-step tasks
+    \item Added a browsing tool so the agent can read full web pages, not just search snippets
+    \item Created a multi-agent system for financial analysis where different agents debate valuations
+\end{itemize}
+
+The multi-agent experiment was fun to build and shows how you could use this approach for other domains where you want different perspectives, like legal analysis or medical diagnosis. Overall, we learned that tool-augmented agents are way more capable than base LLMs alone.
 
 \end{document}

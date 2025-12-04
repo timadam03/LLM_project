@@ -31,11 +31,13 @@ You must strictly follow this process:
     *   **News**: Search for "{ticker} stock news {current_year}" to find major recent headlines (earnings, product launches, legal issues).
 4.  **Determine Assumptions**:
     *   **Growth Rate**: Search for analyst consensus revenue/earnings growth rates for the next 5 years. Look for qualitative justifications (e.g., "expanding into new markets").
-    *   **WACC**: Calculate Weighted Average Cost of Capital. Assume Equity Risk Premium is 5.0%. Formula: WACC = RiskFree + Beta * 5.0. (Simplify by assuming 100% equity financing for this rapid estimate, or find the actual WACC).
+    *   **WACC**: Calculate Weighted Average Cost of Capital. Assume Equity Risk Premium is 5.0%. Formula: WACC = RiskFree + Beta * 5.0. 
+    (Simplify by assuming 100% equity financing for this rapid estimate, or find the actual WACC).
     *   **Terminal Growth Rate**: Use 2.5% (standard GDP growth proxy) unless you find specific reasons otherwise.
 5.  **Calculate Valuation**:
     *   Perform the DCF calculation.
-    *   **EFFICIENCY TIP**: You can calculate the sum of PVs in a single calculator step if you construct the formula correctly (e.g., `FCF * (1+g) / (1+r) + FCF * (1+g)**2 / (1+r)**2 ...`). Do NOT perform one tool call per year if you can combine them.
+    *   **EFFICIENCY TIP**: You can calculate the sum of PVs in a single calculator step if you construct the formula correctly (e.g., `FCF * (1+g) / (1+r) + FCF * (1+g)**2 / (1+r)**2 ...`). 
+    Do NOT perform one tool call per year if you can combine them.
     *   Equity Value = Sum of PVs - Net Debt.
     *   Intrinsic Value per Share = Equity Value / Shares Outstanding.
 6.  **Output**: Provide a structured JSON response.
@@ -92,7 +94,9 @@ def run_financial_agent(ticker, max_steps=40, persona="Expert Financial Analyst"
 
     # Force the model to know it doesn't have the data
     messages = [
-        {"role": "system", "content": date_context + "\n" + formatted_prompt + "\n\nCRITICAL INSTRUCTION: You have NO internal knowledge of today's stock prices or financial metrics. You MUST use 'google_search' or 'website_browsing' to find the current price, FCF, and shares outstanding BEFORE doing any calculations."},
+        {"role": "system", "content": date_context + "\n" + formatted_prompt +
+         "\n\nCRITICAL INSTRUCTION: You have NO internal knowledge of today's stock prices or financial metrics. " +
+         "You MUST use 'google_search' or 'website_browsing' to find the current price, FCF, and shares outstanding BEFORE doing any calculations."},
         {"role": "user", "content": query}
     ]
     steps = 0
