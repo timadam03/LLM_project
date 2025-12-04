@@ -99,8 +99,8 @@ The main agent loop implementation is shown in Figure~\ref{fig:agent_loop}. The 
 
 \begin{figure}[H]
     \centering
-    \adjustbox{max width=0.95\textwidth,center}{\includegraphics{agent.png}}
-    \caption{Main agent loop implementation from \texttt{agent.py} (lines 50-179). The function \texttt{run\_search\_agent()} implements a ReAct-style loop that iteratively calls the LLM, executes tools when requested, and returns a final answer when the LLM provides one without tool calls. The implementation includes trajectory logging, special handling for different tool types (search, browsing, calculator, etc.), and error handling.}
+    \adjustbox{max width=0.2\textwidth,center}{\includegraphics{agent.png}}
+    \caption{Main agent loop implementation from \texttt{agent.py} (lines 50-179). The function \texttt{run\_search\_agent()} implements a ReAct-style loop that iteratively calls the LLM, executes tools when requested, and returns a final answer when the LLM provides one without tool calls. The implementation includes trajectory logging, special handling for different tool types (search, browsing, calculator, etc.), and error handling. Please zoom in to see the code or feel free to check the codebase. Used carbon.now.sh for the image.}
     \label{fig:agent_loop}
 \end{figure}
 
@@ -133,11 +133,11 @@ To reach these scores, we focused on making the base model's outputs align well 
 
 \subsubsection{(2) Search-Augmented Results}
 
-With the search tool enabled, the agent's EM performance improved significantly: the EM score increased to 44\% (+8\% absolute improvement). However, the LLM Judge accuracy on the same prediction file was 72\%, which is 2 absolute points \emph{lower} than the 74\% baseline without search.
+With the search tool enabled, the agent's EM performance improved significantly: the EM score increased to 44\% (+8 percentage points). However, the LLM Judge accuracy on the same prediction file was 72\%, which is 2 percentage points \emph{lower} than the 74\% baseline without search.
 
-These results satisfy the EM requirement in the project description (the search-augmented agent surpasses the 36\% EM baseline by a clear margin), but they do not meet the requested ``+5 absolute points'' improvement in LLM-judge accuracy.
+These results satisfy the EM requirement in the project description (the search-augmented agent surpasses the 36\% EM baseline by a clear margin), but they do not meet the requested ``+5 percentage points'' improvement in LLM-judge accuracy.
 
-\textbf{Why the LLM-judge accuracy did not improve by +5 points:}
+\textbf{Why the LLM-judge accuracy did not improve by +5 percentage points:}
 
 We believe the LLM-judge accuracy decreased (from 74\% to 72\%) for several reasons:
 
@@ -151,7 +151,7 @@ We believe the LLM-judge accuracy decreased (from 74\% to 72\%) for several reas
     \item \textbf{EM vs LLM-judge mismatch}: Search helped significantly with EM (36\% $\rightarrow$ 44\%) by providing exact string matches for specific dates, names, and numbers. However, the LLM judge is more tolerant—it accepts ``December 1972'' and ``1972'' as equivalent, so the baseline already got many of these ``correct enough'' answers without needing search.
 \end{enumerate}
 
-In summary, while search improved exact string matching (EM), it did not improve semantic correctness (LLM-judge) because the baseline was already strong and search introduced some new error cases. The +5 point improvement target may have been optimistic given the high baseline performance.
+In summary, while search improved exact string matching (EM), it did not improve semantic correctness (LLM-judge) because the baseline was already strong and search introduced some new error cases. The +5 percentage point improvement target may have been optimistic given the high baseline performance.
 
 \begin{figure}[H]
     \centering
@@ -179,7 +179,7 @@ In summary, while search improved exact string matching (EM), it did not improve
 \textbf{Configuration} & \textbf{EM Score} & \textbf{LLM Judge Accuracy} \\
 \midrule
 No Search (Baseline) & 36\% & 74\% \\
-Search-Augmented & 44\% $\uparrow$ (+22.2\%) & 72\% $\downarrow$ (-2.7\%) \\
+Search-Augmented & 44\% $\uparrow$ (+8 pp) & 72\% $\downarrow$ (-2 pp) \\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -230,7 +230,7 @@ The tool definitions are shown in Figure~\ref{fig:tools_def} (from \texttt{tools
 
 \begin{figure}[H]
     \centering
-    \adjustbox{max width=0.85\textwidth,center}{\includegraphics{tools.png}}
+    \adjustbox{max width=0.5\textwidth,center}{\includegraphics{tools.png}}
     \caption{Tool definitions from \texttt{tools.py} showing the function schemas for Calculator, Wikipedia Search, and Weather API.}
     \label{fig:tools_def}
 \end{figure}
@@ -366,8 +366,8 @@ The browsing tool was integrated into our search-augmented agent (used together 
 \textbf{Configuration} & \textbf{EM Score} & \textbf{LLM Judge Accuracy} \\
 \midrule
 No Search (Baseline) & 36\% & 74\% \\
-Search Only & 44\% $\uparrow$ (+22.2\%) & 72\% $\downarrow$ (-2.7\%) \\
-Search + Browsing & 44\% $\uparrow$ (+22.2\%) & 72\% $\downarrow$ (-2.7\%) \\
+Search Only & 44\% $\uparrow$ (+8 pp) & 72\% $\downarrow$ (-2 pp) \\
+Search + Browsing & 44\% $\uparrow$ (+8 pp) & 72\% $\downarrow$ (-2 pp) \\
 \bottomrule
 \end{tabular}
 \end{table}
