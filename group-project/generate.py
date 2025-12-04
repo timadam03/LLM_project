@@ -4,12 +4,12 @@ import os
 
 def run_generation():
     # Ensure results directory exists
-    folder = "results/results_4th_run"
+    folder = "results/mark"
     os.makedirs(folder, exist_ok=True)
 
     # 1. Setup Input/Output Paths
     #"data/nq_test_100.jsonl"
-    input_path = "group-project/data/nq_test_100.jsonl"
+    input_path = "data/nq_test_100.jsonl"
 
     output_path_nosearch = os.path.join(folder, "predictions_nosearch.jsonl")
     output_path_search = os.path.join(folder, "predictions_search.jsonl")
